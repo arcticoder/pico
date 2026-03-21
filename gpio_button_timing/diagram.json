@@ -4,7 +4,7 @@
   "editor": "wokwi",
   "parts": [
     { "type": "wokwi-breadboard", "id": "bb1", "top": 0, "left": 0, "attrs": {} },
-    { "type": "wokwi-pi-pico", "id": "pico", "top": -40, "left": 350, "attrs": {} },
+    { "type": "wokwi-pi-pico", "id": "pico", "top": -3.15, "left": 349.2, "attrs": {} },
     {
       "type": "wokwi-led",
       "id": "led1",
@@ -43,16 +43,14 @@
     [ "res_limit:2", "bb1:12t.a", "limegreen", [] ],
     [ "led1:A", "bb1:12t.a", "gray", [] ],
     [ "led1:C", "bb1:12b.a", "black", [] ],
-    [ "pico:GND.1", "bb1:12b.a", "black", [] ],
+    [ "pico:GND.1", "bb1:12b.f", "purple", [] ],
     [ "pico:GP16", "bb1:20t.e", "blue", [] ],
     [ "btn1:1.l", "bb1:20t.e", "yellow", [] ],
     [ "btn1:2.l", "bb1:20b.f", "purple", [] ],
     [ "pico:3V3", "bb1:20b.f", "red", [] ],
     [ "r_pull:1", "bb1:20t.e", "cyan", [] ],
     [ "r_pull:2", "bb1:22t.e", "magenta", [] ],
-    [ "pico:GND.2", "bb1:22t.e", "black", [] ],
-    [ "pico:ADC_VREF", "bb1:tn.34", "", [ "$bb" ] ],
-    [ "pico:3V3", "bb1:tp.34", "", [ "$bb" ] ]
+    [ "pico:GND.2", "bb1:22t.e", "black", [] ]
   ],
   "dependencies": {}
 }
