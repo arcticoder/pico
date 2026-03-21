@@ -3,9 +3,8 @@
   "author": "button-led-timing",
   "editor": "wokwi",
   "parts": [
-    { "type": "wokwi-breadboard", "id": "bb1", "top": 0, "left": 0, "attrs": {} },
-    { "type": "wokwi-pi-pico", "id": "pico", "top": -40, "left": 220, "attrs": {} },
-
+    { "type": "wokwi-breadboard", "id": "bb1", "top": -3, "left": 2.8, "attrs": {} },
+    { "type": "wokwi-pi-pico", "id": "pico", "top": 6.45, "left": 310.8, "attrs": {} },
     {
       "type": "wokwi-led",
       "id": "led1",
@@ -22,13 +21,12 @@
       "rotate": 90,
       "attrs": { "value": "220" }
     },
-
     {
       "type": "wokwi-pushbutton",
       "id": "btn1",
-      "top": 140,
-      "left": 40,
-      "attrs": {}
+      "top": 83,
+      "left": 220.8,
+      "attrs": { "color": "black" }
     },
     {
       "type": "wokwi-resistor",
@@ -40,25 +38,42 @@
     }
   ],
   "connections": [
-    // LED path: GP17 → resistor → LED → GND
     [ "pico:GP17", "bb1:10t.a", "green", [] ],
     [ "r_led:1", "bb1:10t.a", "green", [] ],
-    [ "r_led:2", "bb1:12t.a", "green", [] ],
-    [ "led1:A", "bb1:12t.a", "green", [] ],
+    [ "r_led:2", "bb1:12t.a", "limegreen", [] ],
+    [ "led1:A", "bb1:12t.a", "gray", [] ],
     [ "led1:C", "bb1:12b.a", "black", [] ],
     [ "pico:GND.1", "bb1:12b.a", "black", [] ],
-
-    // Button input: GP16 with pull-down
-    [ "pico:GP16", "bb1:20t.a", "blue", [] ],
-    [ "btn1:1.l", "bb1:20t.a", "blue", [] ],
-
-    [ "btn1:2.r", "bb1:20b.a", "red", [] ],
-    [ "pico:3V3", "bb1:20b.a", "red", [] ],
-
-    // Pull-down resistor: GP16 → GND
-    [ "r_pull:1", "bb1:20t.a", "blue", [] ],
-    [ "r_pull:2", "bb1:22t.a", "black", [] ],
-    [ "pico:GND.2", "bb1:22t.a", "black", [] ]
+    [ "pico:GP16", "bb1:20t.e", "blue", [] ],
+    [ "btn1:1.l", "bb1:20t.e", "yellow", [] ],
+    [ "btn1:2.r", "bb1:20b.f", "purple", [] ],
+    [ "pico:3V3", "bb1:20b.f", "red", [] ],
+    [ "r_pull:1", "bb1:20t.e", "cyan", [] ],
+    [ "r_pull:2", "bb1:22t.e", "magenta", [] ],
+    [ "pico:GND.2", "bb1:22t.e", "black", [] ],
+    [ "pico:GP0", "bb1:tn.25", "", [ "$bb" ] ],
+    [ "pico:GP2", "bb1:31t.a", "", [ "$bb" ] ],
+    [ "pico:GP3", "bb1:31t.b", "", [ "$bb" ] ],
+    [ "pico:GP4", "bb1:31t.c", "", [ "$bb" ] ],
+    [ "pico:GP5", "bb1:31t.d", "", [ "$bb" ] ],
+    [ "pico:GND.2", "bb1:31t.e", "", [ "$bb" ] ],
+    [ "pico:GP8", "bb1:31b.f", "", [ "$bb" ] ],
+    [ "pico:GP9", "bb1:31b.g", "", [ "$bb" ] ],
+    [ "pico:GND.3", "bb1:31b.h", "", [ "$bb" ] ],
+    [ "pico:GP10", "bb1:31b.i", "", [ "$bb" ] ],
+    [ "pico:GP11", "bb1:31b.j", "", [ "$bb" ] ],
+    [ "pico:GND.4", "bb1:bp.25", "", [ "$bb" ] ],
+    [ "pico:GP14", "bb1:bn.25", "", [ "$bb" ] ],
+    [ "pico:GP20", "bb1:38b.j", "", [ "$bb" ] ],
+    [ "pico:GP21", "bb1:38b.i", "", [ "$bb" ] ],
+    [ "pico:GND.6", "bb1:38b.h", "", [ "$bb" ] ],
+    [ "pico:GP22", "bb1:38b.g", "", [ "$bb" ] ],
+    [ "pico:RUN", "bb1:38b.f", "", [ "$bb" ] ],
+    [ "pico:GND.7", "bb1:38t.e", "", [ "$bb" ] ],
+    [ "pico:GP28", "bb1:38t.d", "", [ "$bb" ] ],
+    [ "pico:ADC_VREF", "bb1:38t.c", "", [ "$bb" ] ],
+    [ "pico:3V3", "bb1:38t.b", "", [ "$bb" ] ],
+    [ "pico:3V3_EN", "bb1:38t.a", "", [ "$bb" ] ]    
   ],
   "dependencies": {}
 }
