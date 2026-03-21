@@ -15,9 +15,9 @@
     },
     {
       "type": "wokwi-resistor",
-      "id": "r_led",
-      "top": 40,
-      "left": 40,
+      "id": "res_limit",
+      "top": 43.2,
+      "left": 37.85,
       "rotate": 90,
       "attrs": { "value": "220" }
     },
@@ -31,27 +31,28 @@
     {
       "type": "wokwi-resistor",
       "id": "r_pull",
-      "top": 180,
-      "left": 40,
+      "top": 177.6,
+      "left": 37.85,
       "rotate": 90,
       "attrs": { "value": "10000" }
     }
   ],
   "connections": [
     [ "pico:GP17", "bb1:10t.a", "green", [] ],
-    [ "r_led:1", "bb1:10t.a", "green", [] ],
-    [ "r_led:2", "bb1:12t.a", "limegreen", [] ],
+    [ "res_limit:1", "bb1:10t.a", "yellow", [] ],
+    [ "res_limit:2", "bb1:12t.a", "limegreen", [] ],
     [ "led1:A", "bb1:12t.a", "gray", [] ],
     [ "led1:C", "bb1:12b.a", "black", [] ],
     [ "pico:GND.1", "bb1:12b.a", "black", [] ],
-
     [ "pico:GP16", "bb1:20t.e", "blue", [] ],
     [ "btn1:1.l", "bb1:20t.e", "yellow", [] ],
     [ "btn1:2.l", "bb1:20b.f", "purple", [] ],
     [ "pico:3V3", "bb1:20b.f", "red", [] ],
-
     [ "r_pull:1", "bb1:20t.e", "cyan", [] ],
     [ "r_pull:2", "bb1:22t.e", "magenta", [] ],
-    [ "pico:GND.2", "bb1:22t.e", "black", [] ]
-  ]
+    [ "pico:GND.2", "bb1:22t.e", "black", [] ],
+    [ "pico:ADC_VREF", "bb1:tn.34", "", [ "$bb" ] ],
+    [ "pico:3V3", "bb1:tp.34", "", [ "$bb" ] ]
+  ],
+  "dependencies": {}
 }
