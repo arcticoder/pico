@@ -44,13 +44,20 @@
     [ "led1:A", "bb1:12t.a", "gray", [] ],
     [ "led1:C", "bb1:12b.f", "yellow", [] ],
     [ "pico:GND.1", "bb1:12b.h", "orange", [] ],
+    
     [ "pico:GP16", "bb1:20t.e", "blue", [] ],
+    
     [ "btn1:1.l", "bb1:20t.e", "yellow", [] ],
+    [ "btn1:1.r", "bb1:22t.e", "orange", [ "$bb" ] ], 
+
+    [ "btn1:2.l", "bb1:20b.f", "purple", [ "$bb" ] ],
     [ "btn1:2.r", "bb1:22b.f", "purple", [] ],
+
     [ "pico:3V3", "bb1:22b.g", "red", [] ],
     [ "r_pull:1", "bb1:20t.e", "cyan", [] ],
     [ "r_pull:2", "bb1:22t.e", "magenta", [] ],
     [ "pico:GND.2", "bb1:22t.e", "black", [] ],
+
     [ "pico:ADC_VREF", "bb1:tn.34", "", [ "$bb" ] ],
     [ "pico:3V3", "bb1:tp.34", "", [ "$bb" ] ]
   ],
