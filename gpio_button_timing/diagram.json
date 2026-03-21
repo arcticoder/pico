@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "author": "button-led-timing",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard", "id": "bb1", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-pi-pico", "id": "pico", "top": -40, "left": 220, "attrs": {} },
+
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 80,
+      "left": 40,
+      "rotate": 90,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_led",
+      "top": 40,
+      "left": 40,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 140,
+      "left": 40,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_pull",
+      "top": 180,
+      "left": 40,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    }
+  ],
+  "connections": [
+    // LED path: GP17 → resistor → LED → GND
+    [ "pico:GP17", "bb1:10t.a", "green", [] ],
+    [ "r_led:1", "bb1:10t.a", "green", [] ],
+    [ "r_led:2", "bb1:12t.a", "green", [] ],
+    [ "led1:A", "bb1:12t.a", "green", [] ],
+    [ "led1:C", "bb1:12b.a", "black", [] ],
+    [ "pico:GND.1", "bb1:12b.a", "black", [] ],
+
+    // Button input: GP16 with pull-down
+    [ "pico:GP16", "bb1:20t.a", "blue", [] ],
+    [ "btn1:1.l", "bb1:20t.a", "blue", [] ],
+
+    [ "btn1:2.r", "bb1:20b.a", "red", [] ],
+    [ "pico:3V3", "bb1:20b.a", "red", [] ],
+
+    // Pull-down resistor: GP16 → GND
+    [ "r_pull:1", "bb1:20t.a", "blue", [] ],
+    [ "r_pull:2", "bb1:22t.a", "black", [] ],
+    [ "pico:GND.2", "bb1:22t.a", "black", [] ]
+  ],
+  "dependencies": {}
+}
