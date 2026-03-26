@@ -31,3 +31,5 @@ wokwi-*.log
 *.log
 *.tmp
 *.swp
+
+scratch/
