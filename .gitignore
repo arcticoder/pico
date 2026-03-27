@@ -33,4 +33,4 @@ wokwi-*.log
 *.swp
 
 scratch/
-KiCad_Libraries/
+kicad_libraries/
