@@ -1,0 +1,11 @@
+* gpio_led_basic — Pico GP17 drives a red LED via 220 Ohm resistor
+* Circuit: GP17 (3.3V HIGH) -> R1(220Ω) -> D1(LED) -> GND
+* Matches gpio_led_basic/diagram.json (Wokwi): pico:GP17 -> r1 -> led1 -> pico:GND.1
+V1 1 0 DC 3.3V              ; GP17 output when driven HIGH (Pico logic level)
+R1 1 2 220                  ; 220 Ohm current-limiting resistor
+D1 2 0 LED                  ; Red LED
+
+.model LED D(Is=1e-14 Rs=5 Bv=5 Ibv=1e-3)  ; Standard red LED approximation
+.dc V1 0 3.3 0.05           ; Sweep 0 to 3.3V in 50mV steps
+.print dc v(2) i(D1)        ; LED anode voltage and forward current
+.end

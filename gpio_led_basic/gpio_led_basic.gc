@@ -1,0 +1,17 @@
+* GnuCap simulation — gpio_led_basic
+* Pico GP17 (3.3V HIGH) -> R1(220Ω) -> D1(LED) -> GND
+* Matches gpio_led_basic/diagram.json
+V1 1 0 DC 3.3
+R1 1 2 220
+D1 2 0 LED
+
+.model LED D Is=1e-14 Rs=5
+
+* DC sweep: 0 to 3.3V in 50mV steps (matches GP17 output range)
+.dc V1 0 3.3 0.05
+
+* Print LED anode voltage and forward current
+* i(D1) should be ~4-6mA at 3.3V with a 220Ω resistor and Vf ~2V
+.print dc v(2) i(D1)
+
+.end
