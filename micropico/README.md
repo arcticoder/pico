@@ -1,8 +1,61 @@
-# pico/scratch — LED Circuit Simulation Workspace
+# micropico — MicroPico Device Scripts
 
-This directory contains SPICE netlists, GnuCap batch scripts, and tooling for
-simulating LED driver circuits and generating schematic diagrams from those
-netlists.
+This directory holds MicroPython scripts loaded onto the Raspberry Pi Pico via
+the **MicroPico VS Code extension**.  It replaces the former `scratch/` folder.
+
+---
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `main.py` | General-purpose MicroPico entry point |
+| `lcd1602.py` | I2C LCD 1602 driver |
+| `ws2812.py` | WS2812 RGB LED strip driver |
+| `inventory.md` | Full component inventory (SunFounder Thales kit) |
+
+---
+
+## Circuit simulations → see sibling directories
+
+SPICE netlists, GnuCap batch scripts, and generated schematics have moved to
+their own `gpio_*` directories at the repo root:
+
+| Directory | Circuit |
+|-----------|---------|
+| `gpio_led_single/` | Single LED + 470 Ω, 3.3 V (test.spice / test.gc) |
+| `gpio_led_parallel/` | Two parallel LEDs, 470 Ω each, 3.3 V (test2.spice / test2.gc) |
+| `gpio_led_basic/` | Pico GP17 → 220 Ω → LED (from Wokwi diagram) |
+| `gpio_button_timing/` | Button input + LED timing (from Wokwi diagram) |
+| `gpio_analog_sensing/` | ADC / voltage-divider / calibration platform |
+
+---
+
+## Schematic generation tool → `tools/spice_to_schematic.py`
+
+Run from the repo root to regenerate a PNG schematic from any `.spice` file:
+
+```bash
+python tools/spice_to_schematic.py gpio_led_single/test.spice
+python tools/spice_to_schematic.py gpio_led_parallel/test2.spice
+```
+
+Output is saved as `<netlist-basename>.png` next to the `.spice` file unless
+an explicit output path is given:
+
+```bash
+python tools/spice_to_schematic.py gpio_led_basic/gpio_led_basic.spice gpio_led_basic/schematic.png
+```
+
+---
+
+## Dependencies
+
+| Tool | Install |
+|------|---------|
+| GnuCap | `sudo apt install gnucap` |
+| Python 3.8+ | included in conda base |
+| schemdraw + matplotlib | `pip install schemdraw matplotlib` |
 
 ---
 

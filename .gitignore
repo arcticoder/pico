@@ -33,6 +33,6 @@ wokwi-*.log
 *.swp
 
 kicad_libraries/
-scratch/kicad_scratch/
-scratch/out.txt
-scratch/.micropico
+micropico/kicad_scratch/
+micropico/out.txt
+micropico/.micropico
