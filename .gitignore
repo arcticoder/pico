@@ -32,5 +32,7 @@ wokwi-*.log
 *.tmp
 *.swp
 
-scratch/
 kicad_libraries/
+scratch/kicad_scratch/
+scratch/out.txt
+scratch/.micropico

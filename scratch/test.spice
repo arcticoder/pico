@@ -1,0 +1,9 @@
+* LED Test Circuit
+V1 1 0 DC 3.3V              ; 3.3V supply connected between node 1 and ground (0)
+R1 1 2 470                ; 470 Ohm resistor between node 1 and 2
+D1 2 0 MyLED              ; LED between node 2 and ground
+
+.model MyLED D(Is=1e-14 Rs=10 Bv=5 Ibv=1e-3) ; Simple Diode Model
+.dc V1 0 3.3 0.1            ; Sweep voltage from 0 to 3.3V in 0.1V steps
+.print dc i(V1)           ; Track the current
+.end
