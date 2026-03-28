@@ -1,0 +1,31 @@
+* gpio_button_timing — Pico GP17 drives LED; GP16 reads button with 10k pull-down
+*
+* LED branch: GP17 (3.3V HIGH) -> R_limit(220Ω) -> D_led(LED) -> GND
+* Button branch (closed state): 3V3 -> R_pull(10kΩ) -> GP16 input
+*
+* Matches gpio_button_timing/diagram.json (Wokwi)
+*
+* Two sub-circuits modeled:
+*   Sub 1 — LED drive (swept 0 → 3.3V to verify safe current)
+*   Sub 2 — Button pull-down (DC operating point at 3.3V = button pressed)
+
+* --- Sub 1: LED drive branch ---
+V_gp17 1 0 DC 3.3V             ; GP17 output level
+R_limit 1 2 220                 ; 220 Ohm current-limiting resistor
+D_led 2 0 LED                   ; Red status LED
+
+.model LED D(Is=1e-14 Rs=5 Bv=5 Ibv=1e-3)
+
+* --- Sub 2: Button + pull-down (button-pressed state) ---
+* When button is pressed, GP16 (node 3) is driven to 3.3V via 10kΩ pull-down
+* Current through R_pull: 3.3V / 10kΩ = 0.33mA (negligible load on 3V3 rail)
+V_3v3 4 0 DC 3.3V               ; Pico 3.3V supply rail
+R_pull 4 3 10000                 ; 10kΩ pull-down resistor
+
+* DC sweep of LED branch (primary validation)
+.dc V_gp17 0 3.3 0.05
+
+* Print LED anode voltage and LED current
+.print dc v(2) i(D_led)
+
+.end
