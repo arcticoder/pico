@@ -1,0 +1,56 @@
+* gpio_analog_sensing — Voltage divider for photoresistor sensing
+*
+* Circuit topology:
+*   3V3 -> R_fixed(10kΩ) -> V_mid(ADC0/GP26) -> R_sensor(photoresistor) -> GND
+*   C_filter(100nF) from V_mid to GND  (low-pass, noise reduction)
+*   Potentiometer on GP27(ADC1) for calibration reference
+*   LED on GP15 as controlled light source for photoresistor
+*
+* SPICE models three operating conditions:
+*   1. Photoresistor in bright light  (~1 kΩ)   → V_mid HIGH
+*   2. Photoresistor in dim light     (~50 kΩ)  → V_mid LOW
+*   3. Potentiometer full sweep (0-10kΩ) for calibration
+*
+* Pico connections:
+*   GP26 (ADC0) ← V_mid  (photoresistor divider midpoint)
+*   GP27 (ADC1) ← Pot wiper
+*   GP15        → LED (controlled light source, PWM)
+*   GP4  (SDA)  ← I2C LCD 1602
+*   GP5  (SCL)  ← I2C LCD 1602
+
+* -----------------------------------------------------------------------
+* Model A — Photoresistor in bright light (~1 kΩ)
+* V_mid = 3.3 * R_sensor / (R_fixed + R_sensor)
+*       = 3.3 * 1k / (10k + 1k) = 300 mV
+* -----------------------------------------------------------------------
+V_3v3_A  1 0 DC 3.3V
+R_fixed_A 1 2 10000          ; 10kΩ fixed resistor (top of divider)
+R_bright  2 0 1000            ; ~1kΩ photoresistor in bright light
+
+* -----------------------------------------------------------------------
+* Model B — Photoresistor in dim light (~50 kΩ)
+* V_mid = 3.3 * 50k / (10k + 50k) = 2.75V
+* node 3 = dim-light V_mid
+* -----------------------------------------------------------------------
+V_3v3_B  10 0 DC 3.3V
+R_fixed_B 10 3 10000          ; 10kΩ fixed resistor
+R_dim     3 0 50000           ; ~50kΩ photoresistor in dim light
+
+* -----------------------------------------------------------------------
+* Model C — Potentiometer calibration sweep (0 → 10kΩ)
+* Used to map known resistance → voltage for calibration curve
+* node 5 = potentiometer divider midpoint
+* -----------------------------------------------------------------------
+V_3v3_C  20 0 DC 3.3V
+R_fixed_C 20 5 10000          ; 10kΩ fixed resistor
+
+* Sweep potentiometer resistance from 0 to 10kΩ as V_pot_sweep
+* Model pot as a variable resistor (approximate with voltage source sweep)
+R_pot 5 0 5000               ; 5kΩ = midpoint (default op point)
+
+* -----------------------------------------------------------------------
+.dc V_3v3_A 0 3.3 0.1        ; Sweep supply to see brightness-light divider
+
+.print dc v(2) v(3) v(5)     ; ADC midpoints for bright, dim, and mid pot
+
+.end

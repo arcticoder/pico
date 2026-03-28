@@ -1,0 +1,30 @@
+* GnuCap simulation — gpio_analog_sensing
+* Voltage divider: 3V3 -> R_fixed(10kΩ) -> V_mid -> R_sensor -> GND
+*
+* Three operating conditions swept:
+*   node 2 — bright light photoresistor (~1kΩ)
+*   node 3 — dim light photoresistor (~50kΩ)
+*   node 5 — potentiometer at 5kΩ midpoint
+
+V_3v3_A  1 0 DC 3.3
+R_fixed_A 1 2 10000
+R_bright  2 0 1000
+
+V_3v3_B  10 0 DC 3.3
+R_fixed_B 10 3 10000
+R_dim     3 0 50000
+
+V_3v3_C  20 0 DC 3.3
+R_fixed_C 20 5 10000
+R_pot     5 0 5000
+
+* Sweep supply voltage to verify divider behaviour across full range
+.dc V_3v3_A 0 3.3 0.1
+
+* Print all three midpoint voltages
+* v(2) bright-light ADC reading (~low V, ~0.3V)
+* v(3) dim-light ADC reading  (~high V, ~2.75V)
+* v(5) pot midpoint            (~mid V, ~1.65V)
+.print dc v(2) v(3) v(5)
+
+.end
