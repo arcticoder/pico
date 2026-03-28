@@ -36,3 +36,6 @@ kicad_libraries/
 micropico/kicad_scratch/
 micropico/out.txt
 micropico/.micropico
+
+# scratch/ is a KiCad workspace and local staging area — not tracked
+scratch/
