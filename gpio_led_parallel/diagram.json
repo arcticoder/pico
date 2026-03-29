@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "author": "Arcticoder",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-breadboard",
+      "id": "bb1",
+      "top": 216.2,
+      "left": -293.6,
+      "rotate": 90,
+      "attrs": {}
+    },
+    { "type": "wokwi-pi-pico", "id": "pico", "top": 6.45, "left": -6, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 224.75,
+      "left": 67.2,
+      "attrs": { "value": "470" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": 188.4, "left": 23, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 243.95,
+      "left": 67.2,
+      "attrs": { "value": "470" }
+    },
+    { "type": "wokwi-led", "id": "led2", "top": 207.6, "left": 23, "attrs": { "color": "red" } }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "pico:GND.2", "bb1:bn.5", "black", [ "h0" ] ],
+    [ "pico:GND.8", "bb1:tn.1", "black", [ "h0" ] ],
+    [ "pico:3V3", "bb1:tp.3", "green", [ "h0" ] ],
+    [ "led1:A", "bb1:23t.e", "", [ "$bb" ] ],
+    [ "led1:C", "bb1:23b.f", "green", [ "v0" ] ],
+    [ "bb1:23b.j", "bb1:bn.18", "green", [ "h0" ] ],
+    [ "r2:1", "bb1:25t.c", "", [ "$bb" ] ],
+    [ "r2:2", "bb1:tp.20", "", [ "$bb" ] ],
+    [ "r1:1", "bb1:23t.c", "", [ "$bb" ] ],
+    [ "r1:2", "bb1:tp.18", "", [ "$bb" ] ],
+    [ "led2:A", "bb1:25t.e", "", [ "$bb" ] ],
+    [ "led2:C", "bb1:25b.f", "green", [ "v0" ] ],
+    [ "bb1:25b.j", "bb1:bn.20", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}

@@ -22,9 +22,9 @@ R_pot     5 0 5000
 .dc V_3v3_A 0 3.3 0.1
 
 * Print all three midpoint voltages
-* v(2) bright-light ADC reading (~low V, ~0.3V)
-* v(3) dim-light ADC reading  (~high V, ~2.75V)
-* v(5) pot midpoint            (~mid V, ~1.65V)
+* GnuCap 2017 does not emit column headers in batch mode.
+* Output column order: V_3v3_A | v(2) bright | v(3) dim | v(5) pot-mid
+* At 3.3 V: v(2)~0.30 V (LDR 1kΩ), v(3)~2.75 V (LDR 50kΩ), v(5)~1.65 V
 .print dc v(2) v(3) v(5)
 
 .end

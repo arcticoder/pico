@@ -10,13 +10,11 @@ the **MicroPico VS Code extension**.  It replaces the former `scratch/` folder.
 | File | Purpose |
 |------|---------|
 | `main.py` | General-purpose MicroPico entry point |
-| `lcd1602.py` | I2C LCD 1602 driver |
-| `ws2812.py` | WS2812 RGB LED strip driver |
-| `inventory.md` | Full component inventory (SunFounder Thales kit) |
 
 ---
 
-## Circuit simulations → see sibling directories
+Driver libraries (`lcd1602.py`, `ws2812.py`) have moved to `../lib/`.  
+Component inventory has moved to `../docs/inventory.md`.
 
 SPICE netlists, GnuCap batch scripts, and generated schematics have moved to
 their own `gpio_*` directories at the repo root:

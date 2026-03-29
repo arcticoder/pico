@@ -11,14 +11,20 @@ comfortable.
 
 ---
 
-## Pico pin reference (seated far left, rows 1–20)
+## Pico pin reference (USB port faces up, cols 1–20)
 
-Same Pico placement as the single-LED circuit (see `led_single_breadboard.md`).
+Pico straddles the centre channel.  Left-column pins → row **c**
+(cols 1–20).  Right-column pins → row **h** (cols 1–20).  Col 1 is the
+USB end; col 20 is the opposite (chip) end.
 
-| Row | Col e (left pins) | Col f (right pins) |
+| Col | Row c (left side) | Row h (right side) |
 |-----|-------------------|--------------------|
-|  3  | **GND** ←         | GND                |
-|  5  | GP3               | **3V3_OUT** ←      |
+| 1   | VBUS              | (RUN / debug)      |
+| 2   | VSYS              | GND                |
+| 3   | **GND** ←         | GP0                |
+| 4   | 3V3_EN            | GP1                |
+| 5   | **3V3_OUT** ←     | GP2                |
+| … | …                 | …                  |
 
 ---
 
@@ -37,10 +43,10 @@ Same Pico placement as the single-LED circuit (see `led_single_breadboard.md`).
 
 ### 1. Power the breadboard rails (same as single-LED)
 
-| From                            | To                       | Wire color |
-|---------------------------------|--------------------------|------------|
-| Pico **3V3_OUT** (row 5, col f) | Top red power rail (+)   | Red        |
-| Pico **GND** (row 3, col e)     | Top blue power rail (−)  | Black      |
+| From                       | To                       | Wire color |
+|----------------------------|--------------------------|------------|
+| Pico **3V3_OUT** (c5)      | Top red power rail (+)   | Red        |
+| Pico **GND** (c3)          | Top blue power rail (−)  | Black      |
 
 ### 2. LED branch 1 (left branch)
 

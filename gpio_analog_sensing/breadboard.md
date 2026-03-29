@@ -26,33 +26,41 @@ reducing high-frequency ADC noise.
 
 ---
 
-## Pico pinout reference (seated far left, rows 1–20)
+## Pico pinout reference (USB port faces up, cols 1–20)
 
-| Row | Col e (left)  | Col f (right)    |
-|-----|---------------|------------------|
-|  3  | **GND** ←     | GND              |
-|  5  | GP3           | **3V3_OUT** ←    |
-|  6  | **GP4 (SDA)**←| ADC_VREF         |
-|  7  | **GP5 (SCL)**←| GP28 (ADC2)      |
-|  8  | GND           | AGND             |
-|  9  | GP6           | **GP27 (ADC1)**← |
-| 10  | GP7           | **GP26 (ADC0)**← |
-| 20  | **GP15** ←    | GP16             |
+Pico straddles the centre channel.  Left-column pins → row **c**
+(cols 1–20).  Right-column pins → row **h** (cols 1–20).  Col 1 is the
+USB end; col 20 is the opposite (chip) end.
+
+| Col | Row c (left side)       | Row h (right side)  |
+|-----|-------------------------|---------------------|
+| 1   | VBUS                    | (RUN / debug)       |
+| 2   | VSYS                    | GND                 |
+| 3   | **GND** ←               | GP0                 |
+| 4   | 3V3_EN                  | GP1                 |
+| 5   | **3V3_OUT** ←           | GP2                 |
+| 6   | ADC_VREF                | GP3                 |
+| 7   | GP28/ADC2               | **GP4 (SDA)** ←     |
+| 8   | AGND                    | GND                 |
+| 9   | **GP27/ADC1** ←         | **GP5 (SCL)** ←     |
+| 10  | **GP26/ADC0** ←         | GP6                 |
+| … | …                       | …                   |
+| 20  | **GP15** ←              | GP14                |
 
 ---
 
 ## Parts required
 
-| Component              | Value  | Qty |
-|------------------------|--------|-----|
-| Photoresistor (LDR)    | —      | 1   |
-| Resistor (fixed, top)  | 10 kΩ  | 1   |
-| Capacitor (filter)     | 100 nF | 1   |
-| Potentiometer          | 10 kΩ  | 1   |
-| LED (white)            | —      | 1   |
-| Resistor (LED limit)   | 220 Ω  | 1   |
-| I2C LCD 1602           | —      | 1   |
-| Jumper wires           | —      | ~12 |
+| Component              | Abbrev.  | Value  | Qty |
+|------------------------|----------|--------|-----|
+| Photoresistor (LDR)    | LDR      | —      | 1   |
+| Resistor (fixed, top)  | R_fixed  | 10 kΩ  | 1   |
+| Capacitor (filter)     | C_filter | 100 nF | 1   |
+| Potentiometer          | Pot      | 10 kΩ  | 1   |
+| LED (white)            | LED_src  | —      | 1   |
+| Resistor (LED limit)   | R_led    | 220 Ω  | 1   |
+| I2C LCD 1602           | LCD      | —      | 1   |
+| Jumper wires           | —        | —      | ~12 |
 
 ---
 
@@ -62,8 +70,8 @@ reducing high-frequency ADC noise.
 
 | From                              | To                       | Wire |
 |-----------------------------------|--------------------------|------|
-| Pico **3V3_OUT** (row 5, col f)   | Top red rail (+)         | Red  |
-| Pico **GND** (row 3, col e)       | Top blue rail (−)        | Black|
+| Pico **3V3_OUT** (c5)             | Top red rail (+)         | Red  |
+| Pico **GND** (c3)                 | Top blue rail (−)        | Black|
 
 ---
 
@@ -81,9 +89,9 @@ The 10 kΩ fixed resistor sits **above** the midpoint; the LDR sits **below**.
 
 **V_mid signal wire (to ADC0):**
 
-| From              | To                          | Wire   |
-|-------------------|-----------------------------|--------|
-| Row 24, col c     | Pico **GP26** (row 10, col f) | Cyan |
+| From              | To                       | Wire   |
+|-------------------|--------------------------|--------|
+| Row 24, col c     | Pico **GP26** (c10)      | Cyan   |
 
 ---
 
@@ -104,7 +112,7 @@ Connects V_mid to GND; bridging the gap is fine.
 |--------------|------------------------|--------|
 | VCC          | Red rail (+)           | Red    |
 | GND          | Blue rail (−)          | Black  |
-| Wiper (SIG)  | Pico **GP27** (row 9, col f) | Purple |
+| Wiper (SIG)  | Pico **GP27** (c9)     | Purple |
 
 ---
 
@@ -114,7 +122,7 @@ Aim the LED toward the photoresistor for repeatable controlled illumination.
 
 | Step | From                       | To              | Wire   |
 |------|----------------------------|-----------------|--------|
-| a    | Pico **GP15** (row 20, col e) | Row 40, col e | Green  |
+| a    | Pico **GP15** (c20)        | Row 40, col e   | Green  |
 | b    | R_led (220 Ω) leg 1        | Row 40, col e   | —      |
 | c    | R_led leg 2                | Row 42, col e   | —      |
 | d    | LED anode (+)              | Row 42, col e   | —      |
@@ -131,8 +139,8 @@ Use the **4-pin I2C backpack version**:
 |---------|------------------------|--------|
 | GND     | Blue rail (−)          | Black  |
 | VCC     | Red rail (+)           | Red    |
-| SDA     | Pico **GP4** (row 6, col e) | Blue |
-| SCL     | Pico **GP5** (row 7, col e) | Yellow |
+| SDA     | Pico **GP4** (h7)      | Blue   |
+| SCL     | Pico **GP5** (h9)      | Yellow |
 
 ---
 
@@ -156,5 +164,15 @@ In near darkness, LDR ≈ 1 MΩ → V_mid ≈ 3.27 V
 gnucap -b gpio_analog_sensing/gpio_analog_sensing.gc
 ```
 
-Compare `v(2)` (bright), `v(3)` (dim), `v(5)` (pot mid) in the output to
-predict expected ADC readings before building.
+Run from the repo root.  GnuCap 2017 does not label output columns; the
+four numeric columns correspond to:
+
+| Column | Signal | Meaning |
+|--------|--------|---------|
+| 1      | V_3v3_A | Swept supply voltage (0 V → 3.3 V) |
+| 2      | v(2)   | Bright-light node — R_fixed / R_bright (LDR ≈ 1 kΩ) |
+| 3      | v(3)   | Dim-light node — R_fixed / R_dim (LDR ≈ 50 kΩ) |
+| 4      | v(5)   | Potentiometer midpoint — R_fixed / R_pot (5 kΩ) |
+
+At V_supply = 3.3 V, expected values: v(2) ≈ 0.30 V, v(3) ≈ 2.75 V,
+v(5) ≈ 1.65 V.  Use these to predict ADC counts before building.

@@ -14,14 +14,23 @@ button is held and logs press/release timestamps.
 
 ---
 
-## Pico pinout reference (Pico seated far left, rows 1–20)
+## Pico pinout reference (USB port faces up, cols 1–20)
 
-| Row | Col e (left pins) | Col f (right pins) |
-|-----|-------------------|--------------------|
-|  3  | **GND** ←         | GND                |
-|  5  | GP3               | **3V3_OUT** ←      |
-| 19  | GP14              | **GP17** ← LED out |
-| 20  | GP15              | **GP16** ← btn in  |
+Pico straddles the centre channel.  Left-column pins → row **c**
+(cols 1–20).  Right-column pins → row **h** (cols 1–20).  Col 1 is the
+USB end; col 20 is the opposite (chip) end.
+
+| Col | Row c (left side)       | Row h (right side) |
+|-----|-------------------------|--------------------|
+| 1   | VBUS                    | (RUN / debug)      |
+| 2   | VSYS                    | GND                |
+| 3   | **GND** ←               | GP0                |
+| 4   | 3V3_EN                  | GP1                |
+| 5   | **3V3_OUT** ←           | GP2                |
+| … | …                       | …                  |
+| 18  | **GP17** ← LED out      | GND                |
+| 19  | **GP16** ← btn in       | GP13               |
+| 20  | GP15                    | GP14               |
 
 ---
 
@@ -43,38 +52,38 @@ button is held and logs press/release timestamps.
 
 | From                             | To                       | Wire color |
 |----------------------------------|--------------------------|------------|
-| Pico **3V3_OUT** (row 5, col f)  | Top red power rail (+)   | Red        |
-| Pico **GND** (row 3, col e)      | Top blue power rail (−)  | Black      |
+| Pico **3V3_OUT** (c5)            | Top red power rail (+)   | Red        |
+| Pico **GND** (c3)                | Top blue power rail (−)  | Black      |
 
 ---
 
 ### 2. LED branch (GP17 output)
 
-| Step | From                          | To                | Wire color |
-|------|-------------------------------|-------------------|------------|
-| a    | Pico **GP17** (row 19, col f) | Row 22, col f     | Green      |
-| b    | Resistor 220 Ω leg 1          | Row 22, col f     | —          |
-| c    | Resistor 220 Ω leg 2          | Row 24, col e     | —          |
-| d    | **LED anode (+)**             | Row 24, col e     | —          |
-| e    | **LED cathode (−)**           | Row 26, col e     | —          |
-| f    | Row 26, col e                 | Blue rail (−)     | Black      |
+| Step | From                     | To                | Wire color |
+|------|--------------------------|-------------------|------------|
+| a    | Pico **GP17** (c18)      | Row 22, col f     | Green      |
+| b    | Resistor 220 Ω leg 1     | Row 22, col f     | —          |
+| c    | Resistor 220 Ω leg 2     | Row 24, col e     | —          |
+| d    | **LED anode (+)**        | Row 24, col e     | —          |
+| e    | **LED cathode (−)**      | Row 26, col e     | —          |
+| f    | Row 26, col e            | Blue rail (−)     | Black      |
 
 ---
 
 ### 3. Button branch (GP16 input, active-high pull-down)
 
-The button bridges the 3.3 V rail to GP16. The 10 kΩ pull-down ensures GP16
-reads 0 V when the button is open.
+The button bridges the 3.3 V rail to GP16.  A 10 kΩ pull-down resistor
+ensures GP16 reads 0 V when the button is open.
 
-| Step | From                          | To                  | Wire color |
-|------|-------------------------------|---------------------|------------|
-| a    | Red rail (+) / 3V3            | Row 30, col f       | Red        |
-| b    | Push button pin 2 (right)     | Row 30, col f       | —          |
-| c    | Push button pin 1 (left)      | Row 30, col a       | —          |
-| d    | Pico **GP16** (row 20, col f) | Row 30, col a       | Blue       |
-| e    | R_pull 10 kΩ leg 1            | Row 30, col a       | —          |
-| f    | R_pull 10 kΩ leg 2            | Row 32, col a       | —          |
-| g    | Row 32, col a                 | Blue rail (−)       | Black      |
+| Step | From                     | To                  | Wire color |
+|------|--------------------------|---------------------|------------|
+| a    | Red rail (+) / 3V3       | Row 30, col f       | Red        |
+| b    | Push button pin 2 (right)| Row 30, col f       | —          |
+| c    | Push button pin 1 (left) | Row 30, col a       | —          |
+| d    | Pico **GP16** (c19)      | Row 30, col a       | Blue       |
+| e    | Pull-down resistor (10 kΩ) leg 1 | Row 30, col a | —        |
+| f    | Pull-down resistor leg 2 | Row 32, col a       | —          |
+| g    | Row 32, col a            | Blue rail (−)       | Black      |
 
 ---
 

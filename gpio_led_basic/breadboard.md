@@ -11,20 +11,25 @@ GP17 drives 3.3 V when HIGH; the resistor limits forward current to a safe
 
 ---
 
-## Pico pinout reference (seated far left, rows 1–20)
+## Pico pinout reference (USB port faces up, cols 1–20)
 
-Pico USB port faces **left**. Left-side pins are in col **e**; right-side
-in col **f**.
+Pico straddles the centre channel.  Left-column pins → row **c**
+(cols 1–20).  Right-column pins → row **h** (cols 1–20).  Col 1 is the
+USB end; col 20 is the opposite (chip) end.
 
-| Row | Col e (left pins) | Col f (right pins) |
-|-----|-------------------|--------------------|
-|  3  | **GND** ←         | GND                |
-|  5  | GP3               | 3V3_OUT            |
-| ... | ...               | ...                |
-| 19  | GP14              | **GP17** ←         |
-| 20  | GP15              | GP16               |
+| Col | Row c (left side)  | Row h (right side) |
+|-----|--------------------|--------------------|
+| 1   | VBUS               | (RUN / debug)      |
+| 2   | VSYS               | GND                |
+| 3   | **GND** ←          | GP0                |
+| 4   | 3V3_EN             | GP1                |
+| 5   | 3V3_OUT            | GP2                |
+| … | …                  | …                  |
+| 18  | **GP17** ← output  | GND                |
+| 19  | GP16               | GP13               |
+| 20  | GP15               | GP14               |
 
-> GP17 is on the **right side**, row 19, col f.
+> GP17 is on the **left side**, col 18, row **c** → breadboard hole **c18**.
 
 ---
 
@@ -45,49 +50,44 @@ in col **f**.
 
 | From                        | To                       | Wire color |
 |-----------------------------|--------------------------|------------|
-| Pico **GND** (row 3, col e) | Top blue power rail (−)  | Black      |
+| Pico **GND** (c3)           | Top blue power rail (−)  | Black      |
 
 ### 2. Place the resistor (220 Ω)
 
-- Insert one leg into **row 22, col e** (same breadboard half as GP17 side)
-- Insert other leg into **row 24, col e**
+- Insert one leg into **row 22, col a**
+- Insert other leg into **row 24, col a**
 
 Add signal wire from GP17 to resistor input:
 
-| From                           | To             | Wire color |
-|--------------------------------|----------------|------------|
-| Pico **GP17** (row 19, col f)  | Row 22, col f  | Green      |
-| Row 22, col f                  | Row 22, col e  | short wire |
-
-> Or simply insert R1 directly straddling the gap (col e to col f) at row 22.
+| From                     | To             | Wire color |
+|--------------------------|----------------|------------|
+| Pico **GP17** (c18)      | Row 22, col a  | Green      |
 
 ### 3. Place the LED
 
 | LED terminal   | Breadboard position | Notes                        |
 |----------------|---------------------|------------------------------|
-| **Anode (+)**  | Row 24, col e       | Longer leg; connects to R1 output |
-| **Cathode (−)**| Row 26, col e       | Shorter leg; to GND          |
+| **Anode (+)**  | Row 24, col a       | Longer leg; connects to R1 output |
+| **Cathode (−)**| Row 26, col a       | Shorter leg; to GND          |
 
 ### 4. Connect LED cathode to ground
 
 | From           | To                      | Wire color |
 |----------------|-------------------------|------------|
-| Row 26, col e  | Top blue power rail (−) | Black      |
+| Row 26, col a  | Top blue power rail (−) | Black      |
 
 ---
 
 ## Summary diagram
 
 ```
-Pico GP17 (row 19, col f)
-        │
-       [R1 220Ω]  rows 22-24
-        │
-       LED anode  row 24
-        │
-       LED cathode  row 26
-        │
-     GND rail (−)
+Pico GP17 (c18) ──── [R1 220Ω]  rows 22–24, col a
+                                  │
+                               LED anode   row 24, col a
+                                  │
+                               LED cathode row 26, col a
+                                  │
+                              GND rail (−)
 ```
 
 ---
@@ -102,12 +102,4 @@ I = (3.3 V − 2.0 V) / 220 Ω ≈ 5.9 mA
 
 Well within the 20 mA LED limit and the Pico's 12 mA per-pin drive current.
 
----
-
-## Simulation
-
-```bash
-gnucap -b gpio_led_basic/gpio_led_basic.gc
-```
-
-`i(D1)` at 3.3 V should print approximately `5.9e-03`.
+See [README.md](README.md) for simulation run instructions.
