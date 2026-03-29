@@ -60,3 +60,27 @@ Key things to note for your first build session:
 - `mpremote run gpio_analog_sensing/main.py` drops straight into the live ADC readout loop
 <!-- ------ -->
 ---
+Completed: *Commit and push all changes* (9/9)
+
+All 15 tasks done in commit `2f41606`, pushed to `origin/main`. Summary of what changed:
+
+**README.md (tasks 1–5)** — now lists all 5 project directories with cross-refs to sub-READMEs, a `gnucap -b`/`ngspice -b` simulation section, and a progression table in "Next steps" with file links.
+
+**README.md (task 4)** — new file covering build steps, MicroPython upload, and simulation run instructions.
+
+**Breadboard reorientation (tasks 6–8, 13)** — all four breadboard.md files updated from "USB faces left / col e / col f" to:
+- "USB port faces UP" convention
+- Wokwi row **c** (left rail, cols 1–20) and row **h** (right rail, cols 1–20)
+- Correct pin positions: GP17 → c18, GP16 → c19, GP15 → c20, GP26 → c10, GP27 → c9, GP4 → h7, GP5 → h9
+
+**breadboard.md (task 9)** — `R_pull` renamed to "pull-down resistor (10 kΩ)" matching the inventory.
+
+**breadboard.md (task 14)** — BOM table gains an `Abbrev.` column (LDR, R_fixed, C_filter, Pot, LED_src, R_led, LCD).
+
+**GnuCap output labels (task 15)** — breadboard.md Simulation section now has an explicit column-order table; gpio_analog_sensing.gc has a matching comment: `V_3v3_A | v(2) bright | v(3) dim | v(5) pot-mid`.
+
+**File relocations (tasks 10–11)** — `micropico/inventory.md` → inventory.md; `micropico/lcd1602.py` and `ws2812.py` → lib.
+
+**scratch/led_test.gc (task 12)** — deleted (was untracked; scratch is gitignored).
+<!-- ------ -->
+---
