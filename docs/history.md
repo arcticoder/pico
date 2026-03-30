@@ -84,3 +84,23 @@ All 15 tasks done in commit `2f41606`, pushed to `origin/main`. Summary of what 
 **scratch/led_test.gc (task 12)** — deleted (was untracked; scratch is gitignored).
 <!-- ------ -->
 ---
+Summary of what was delivered across this session:
+
+**Renames** — `gpio_led_single/` → led_single, `gpio_led_parallel/` → led_parallel
+
+**All 5 breadboard.md files** — USB-up orientation paragraph, `GND.1`, `3V3`, exact wire specs from inventory (colour + length per step)
+
+**inventory.md** — wire section reformatted into proper markdown tables
+
+**README.md** — fully rewritten:
+- New title ("Single-Breadboard Project Series")
+- Per-stage tables listing every file with its purpose
+- New Schematics section (spice_to_schematic.py usage)
+- mpremote upload section (replaces Thonny)
+- GnuCap vs ngspice comparison table with per-stage simulation commands
+- Repo structure tree with per-file annotations
+- Planned stages 6–8 with inventory feasibility notes
+
+**New `bom.md` files** — gpio_pwm_led, gpio_interrupt_button, gpio_i2c_lcd each with a parts table and planned file list
+<!-- ------ -->
+---
