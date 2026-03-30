@@ -126,7 +126,6 @@ safe current from the Pico's 3.3 V output pin when power is applied.
 | File | Purpose |
 |------|---------|
 | `test.spice` | ngspice netlist — DC sweep 0 V → 3.3 V |
-
 | `schematic.png` | Auto-generated schematic from `test.spice` |
 | `breadboard.md` | Step-by-step wiring guide with wire selections |
 
@@ -140,7 +139,6 @@ rail.  Confirms that two branches stay within safe current limits simultaneously
 | File | Purpose |
 |------|---------|
 | `test2.spice` | ngspice netlist |
-
 | `schematic.png` | Auto-generated schematic |
 | `breadboard.md` | Step-by-step wiring guide with wire selections |
 
