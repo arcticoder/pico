@@ -111,3 +111,24 @@ Completed: *Rewrite README.md* (4/7)
 All 7 tasks are complete and pushed. The repo is clean at `6ba9135`. Nothing remains from the previous session's task list.
 <!-- ------ -->
 ---
+All 20 issues resolved, pushed as `5ba6258`. Summary of what was done:
+
+**Issue 1** — spice_to_schematic.py now outputs `schematic.png` in the same directory as the input `.spice` file (instead of `<basename>.png`). No more duplicate PNGs.
+
+**Issue 2** — README has a new "### Running on WSL (Windows 11)" section documenting `usbipd attach --busid <X-Y> --wsl --auto-attach` before the mpremote section.
+
+**Issue 3** — README mpremote block split: `mpremote repl` is in its own code block with an explicit note that it's interactive and other `mpremote` commands must be run from the shell, not the REPL.
+
+**Issue 4** — All 5 `.gc` GnuCap files removed from the repo (`git rm`). README simulation section now ngspice-only. All breadboard.md simulation commands updated to `ngspice -b`.
+
+**Issues 5–20** — All 5 breadboard.md files fixed:
+- Section headers: `cols 1–20` → `rows 1–20`
+- Intro text: `row c/h` → `column h/c`, `Col 1` → `Row 1`
+- Power rails: `outer edges` → `left and right edges`
+- Pin tables: completely rewritten — left=column h (GP0/GP1/GND.1...), right=column c (VBUS/VSYS/GND.8/3V3...) with correct signal assignments at correct rows
+- GND pin: `GND.1 (c3)` → `GND.8 (c3)` (GND.8 is the pin adjacent to VSYS on the right side)
+- GP17: row 18 → row 19; GP16: row 19 → row 20; GP15: `c20` → `h20`; GP4/SDA: `h7` → `h6`; GP5/SCL: `h9` → `h7`
+- Power rail references: `Top red/blue power rail` → `Right power rail (+)/(−)` throughout
+- led_parallel: branch labels corrected (cols A–C are the right half, cols F–J are the left half after rotation)
+<!-- ------ -->
+---
