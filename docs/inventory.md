@@ -100,8 +100,8 @@ Update quantities as components are used or added.
 |-------------|-------------|----------|
 | Black       | 0.4         | 10       |
 | Yellow      | 0.6         | 10       |
-| Green       | 1.0         | 8        |
-| Blue        | 1.25        | 9        |
+| Green       | 1.0         | 10       |
+| Blue        | 1.25        | 10       |
 | Non-covered | 0.25        | 13       |
 
 ### Jump Wires Box — Middle Top
