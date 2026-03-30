@@ -132,6 +132,16 @@ yellow 12 7
 red 12 7
 
 | Dupont Wires       | 10       | M-F                                       |
+red 22 1
+yellow 22 1
+grey 22 1
+orange 22 1
+green 22 1
+blue 22 1
+purple 22 1
+black 22 1
+white 22 1
+beige 22 1
 ---
 
 ## Microcontroller
