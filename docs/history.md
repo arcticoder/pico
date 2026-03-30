@@ -104,3 +104,10 @@ Summary of what was delivered across this session:
 **New `bom.md` files** — gpio_pwm_led, gpio_interrupt_button, gpio_i2c_lcd each with a parts table and planned file list
 <!-- ------ -->
 ---
+The working tree is clean — commit `bddc867` plus a subsequent history.md update (`6ba9135`) are all pushed. Everything on the todo list was completed in the previous response. Let me mark the list current: 
+
+Completed: *Rewrite README.md* (4/7)
+
+All 7 tasks are complete and pushed. The repo is clean at `6ba9135`. Nothing remains from the previous session's task list.
+<!-- ------ -->
+---
