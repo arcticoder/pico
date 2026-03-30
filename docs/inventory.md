@@ -73,75 +73,90 @@ Update quantities as components are used or added.
 |--------------------|----------|-------------------------------------------|
 | Breadboard (full)  | 1        | 830-point                                 |
 | Micro USB Cable    | 1        | For Pico power + data                     |
-| Jump Wires Box     | 1        |                                           |
 
-Jump Wires Box - left side
-| colour | length | quantity | 
-|--------|--------|----------|
-orange 2.25 14
-red 2.5 10
-black 1.5 14
+---
 
-Jump Wires Box - middle left
-| colour | length | quantity | 
-|--------|--------|----------|
-white 1.5 14
-white 5 10
-yellow 2 12
+## Jump Wires (solid-core, pre-bent 90°)
 
-Jump Wires Box - middle right
-| colour | length | quantity | 
-|--------|--------|----------|
-black 0.4 10
-yellow 0.6 10
-green 1.0 8
-blue 1.25 9
-non-covered 0.25 13
+### Jump Wires Box — Left Side
 
-Jump Wires Box - middle top
-| colour | length | quantity | 
-|--------|--------|----------|
-green 7.5 10
-blue 10 10
+| Colour | Length (cm) | Quantity |
+|--------|-------------|----------|
+| Orange | 2.25        | 14       |
+| Red    | 2.5         | 10       |
+| Black  | 1.5         | 14       |
 
-Jump Wires Box - middle bottom
-| colour | length | quantity | 
-|--------|--------|----------|
-red 12.6 10
+### Jump Wires Box — Middle Left
 
-| Jumper Wires       | 65       | M-M; pre-cut various lengths              |
+| Colour | Length (cm) | Quantity |
+|--------|-------------|----------|
+| White  | 1.5         | 14       |
+| White  | 5           | 10       |
+| Yellow | 2           | 12       |
 
-| colour | length | quantity | 
-|--------|--------|----------|
-blue 16 2
-red 16 2
-black 16 2
-red 20
-blue 20
-white 20
-blue 25
-white 25
-red 25
-black 25
-white 12 7
-black 12 7
-orange 12 7
-blue 12 7
-green 12 7
-yellow 12 7
-red 12 7
+### Jump Wires Box — Middle Right
 
-| Dupont Wires       | 10       | M-F                                       |
-red 22 1
-yellow 22 1
-grey 22 1
-orange 22 1
-green 22 1
-blue 22 1
-purple 22 1
-black 22 1
-white 22 1
-beige 22 1
+| Colour      | Length (cm) | Quantity |
+|-------------|-------------|----------|
+| Black       | 0.4         | 10       |
+| Yellow      | 0.6         | 10       |
+| Green       | 1.0         | 8        |
+| Blue        | 1.25        | 9        |
+| Non-covered | 0.25        | 13       |
+
+### Jump Wires Box — Middle Top
+
+| Colour | Length (cm) | Quantity |
+|--------|-------------|----------|
+| Green  | 7.5         | 10       |
+| Blue   | 10          | 10       |
+
+### Jump Wires Box — Middle Bottom
+
+| Colour | Length (cm) | Quantity |
+|--------|-------------|----------|
+| Red    | 12.6        | 10       |
+
+---
+
+## Jumper Wires (M-M Dupont, pre-cut)
+
+| Colour | Length (cm) | Quantity |
+|--------|-------------|----------|
+| Blue   | 16          | 2        |
+| Red    | 16          | 2        |
+| Black  | 16          | 2        |
+| Red    | 20          | 1        |
+| Blue   | 20          | 1        |
+| White  | 20          | 1        |
+| Blue   | 25          | 1        |
+| White  | 25          | 1        |
+| Red    | 25          | 1        |
+| Black  | 25          | 1        |
+| White  | 12          | 7        |
+| Black  | 12          | 7        |
+| Orange | 12          | 7        |
+| Blue   | 12          | 7        |
+| Green  | 12          | 7        |
+| Yellow | 12          | 7        |
+| Red    | 12          | 7        |
+
+---
+
+## Dupont Wires (M-F)
+
+| Colour | Length (cm) | Quantity |
+|--------|-------------|----------|
+| Red    | 22          | 1        |
+| Yellow | 22          | 1        |
+| Grey   | 22          | 1        |
+| Orange | 22          | 1        |
+| Green  | 22          | 1        |
+| Blue   | 22          | 1        |
+| Purple | 22          | 1        |
+| Black  | 22          | 1        |
+| White  | 22          | 1        |
+| Beige  | 22          | 1        |
 ---
 
 ## Microcontroller

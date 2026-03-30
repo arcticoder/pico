@@ -1,95 +1,186 @@
-# Raspberry Pi Pico Experiments
+# Raspberry Pi Pico — Single-Breadboard Project Series
 
-Small, self-contained experiments using a Raspberry Pi Pico and breadboard components.
-
-Each folder is an independent experiment with:
-- `main.py` → MicroPython code that runs on the Pico
-- `diagram.json` → circuit layout for Wokwi simulator
+A progressive series of experiments using one Raspberry Pi Pico and one
+830-point breadboard.  Each stage builds directly on the previous one: the
+same breadboard is reconfigured as new circuits are introduced.  Stages 1–5
+are fully documented with MicroPython code, SPICE simulations, and step-by-step
+breadboard wiring guides.  See [docs/inventory.md](docs/inventory.md) for the
+complete component list; no extra purchases are required to complete stages 1–5.
 
 ---
 
 ## What is `diagram.json`?
 
-`diagram.json` is used by the Wokwi simulator:
-https://wokwi.com/
-
-It defines:
-- components (Pico, LED, resistors, etc.)
-- wiring (breadboard connections)
+`diagram.json` is a Wokwi circuit layout file (https://wokwi.com/).  It
+defines the components and wiring for the online simulator.
 
 ### How to use it
 
 1. Go to https://wokwi.com/projects/new
-2. Open the project settings
-3. Replace the default `diagram.json` with the one from this repo
-4. Add `main.py` if needed
-5. Run the simulation
+2. Replace the default `diagram.json` with the one from a project folder
+3. Add `main.py` if the project has one
+4. Run the simulation
+
+---
+
+## Schematics
+
+Each project has a `schematic.png` generated from its `.spice` netlist.  To
+regenerate any schematic after editing the netlist:
+
+```bash
+# from the repo root
+python tools/spice_to_schematic.py led_single/test.spice
+python tools/spice_to_schematic.py led_parallel/test2.spice
+python tools/spice_to_schematic.py gpio_led_basic/gpio_led_basic.spice
+python tools/spice_to_schematic.py gpio_button_timing/gpio_button_timing.spice
+python tools/spice_to_schematic.py gpio_analog_sensing/gpio_analog_sensing.spice
+```
+
+Output is written as `<netlist-basename>.png` next to the `.spice` file.
+`tools/spice_to_schematic.py` uses **schemdraw** to parse SPICE `R`, `C`,
+`V`, and `D` elements and render a schematic image.
 
 ---
 
 ## Running on real hardware
 
-Requirements:
-- Raspberry Pi Pico
-- MicroPython firmware installed
-- USB connection
+Requirements: Raspberry Pi Pico with MicroPython firmware, USB data cable.
 
-### Setup (one-time)
+### One-time firmware setup
 
-1. Hold BOOTSEL on the Pico
-2. Plug into USB
-3. Copy MicroPython UF2 from:
-   https://micropython.org/download/rp2/
+1. Hold the BOOTSEL button on the Pico and plug into USB — it mounts as a
+   drive.
+2. Download the MicroPython UF2 from https://micropython.org/download/rp2/
+3. Copy the UF2 onto the drive.  The Pico reboots into MicroPython.
+
+### Upload code with mpremote
+
+[mpremote](https://docs.micropython.org/en/latest/reference/mpremote.html) is
+the official MicroPython CLI tool for file transfer and REPL access.
+
+```bash
+# Install (conda / pip)
+pip install mpremote        # version 1.27.0 used here
+
+# Copy main.py from a project to the Pico
+mpremote cp gpio_led_basic/main.py :main.py
+
+# Open the REPL to see print() output
+mpremote repl
+
+# List files on the Pico
+mpremote ls
+
+# Run a script without copying it (useful for testing)
+mpremote run gpio_led_basic/main.py
+```
+
+The script stored as `main.py` on the Pico runs automatically on power-up.
 
 ---
 
-### Upload code
+## Stages (the project path)
 
-Using Thonny:
-
-1. Open Thonny
-2. Select:
-```
-
-MicroPython (Raspberry Pi Pico)
-
-```
-3. Open `main.py` from a project folder
-4. Save it to the Pico as:
-```
-
-main.py
-
-```
-
-The script runs automatically after saving.
+Work through these stages in order.  Each stage has its own folder with a
+README, simulation files, and breadboard wiring guide.  You can simulate
+before building — run the GnuCap or ngspice script to predict voltages and
+currents before placing a single component.
 
 ---
 
-## Projects
+### Stage 1 — Static LED from 3.3 V rail (`led_single/`)
 
-### gpio_led_single/
-Single red LED, 470 Ω resistor, 3.3 V supply.
-SPICE: `gpio_led_single/test.spice` · GnuCap: `gpio_led_single/test.gc`
+No firmware needed.  Validates that a 470 Ω resistor and a red LED draw a
+safe current from the Pico's 3.3 V output pin when power is applied.
 
-### gpio_led_parallel/
-Two parallel LEDs, one 470 Ω each, 3.3 V supply.
-SPICE: `gpio_led_parallel/test2.spice` · GnuCap: `gpio_led_parallel/test2.gc`
+| File | Purpose |
+|------|---------|
+| `test.spice` | ngspice netlist — DC sweep 0 V → 3.3 V |
+| `test.gc` | GnuCap batch script — same sweep |
+| `schematic.png` | Auto-generated schematic from `test.spice` |
+| `breadboard.md` | Step-by-step wiring guide with wire selections |
 
-### gpio_led_basic/
-First Pico GPIO output test: GP17 drives a red LED via 220 Ω.
-See [gpio_led_basic/README.md](gpio_led_basic/README.md) for build and run
-instructions.
+---
 
-### gpio_button_timing/
-Adds button input (GP16, pull-down) and logs press/release timestamps.
-See [gpio_button_timing/README.md](gpio_button_timing/README.md).
+### Stage 2 — Two parallel LEDs (`led_parallel/`)
 
-### gpio_analog_sensing/
-Photoresistor voltage-divider platform with potentiometer calibration
-reference and controlled white LED light source.
-See [gpio_analog_sensing/README.md](gpio_analog_sensing/README.md) for
-full build, calibration, and noise-measurement guides.
+Extends stage 1: two LED+resistor branches in parallel from the same 3.3 V
+rail.  Confirms that two branches stay within safe current limits simultaneously.
+
+| File | Purpose |
+|------|---------|
+| `test2.spice` | ngspice netlist |
+| `test2.gc` | GnuCap batch script |
+| `schematic.png` | Auto-generated schematic |
+| `breadboard.md` | Step-by-step wiring guide with wire selections |
+
+---
+
+### Stage 3 — GPIO-controlled LED (`gpio_led_basic/`)
+
+First use of a GPIO pin: **GP17** drives a red LED via 220 Ω.  MicroPython
+runs a blink loop.
+
+| File | Purpose |
+|------|---------|
+| `main.py` | MicroPython blink loop |
+| `diagram.json` | Wokwi circuit layout |
+| `gpio_led_basic.spice` | ngspice netlist |
+| `gpio_led_basic.gc` | GnuCap batch script |
+| `schematic.png` | Auto-generated schematic |
+| `breadboard.md` | Step-by-step wiring guide |
+| `README.md` | Build and run instructions |
+
+---
+
+### Stage 4 — Button input + LED timing (`gpio_button_timing/`)
+
+Adds a push button on **GP16** with a 10 kΩ pull-down.  `main.py` turns the
+LED on while the button is held and logs press/release timestamps to the REPL.
+
+| File | Purpose |
+|------|---------|
+| `main.py` | MicroPython button-timing loop |
+| `diagram.json` | Wokwi circuit layout |
+| `gpio_button_timing.spice` | ngspice netlist |
+| `gpio_button_timing.gc` | GnuCap batch script |
+| `schematic.png` | Auto-generated schematic |
+| `breadboard.md` | Step-by-step wiring guide |
+| `README.md` | Build and run instructions |
+
+---
+
+### Stage 5 — Analog sensing (voltage divider + ADC) (`gpio_analog_sensing/`)
+
+Photoresistor voltage-divider platform.  **GP26/ADC0** reads the LDR midpoint;
+**GP27/ADC1** reads a potentiometer calibration reference; **GP15** drives a
+white LED as a controlled light source.  Optional I2C LCD 1602 displays live
+readings.
+
+| File | Purpose |
+|------|---------|
+| `main.py` | MicroPython ADC read + LCD display loop |
+| `calibration.py` | Calibration helper script |
+| `diagram.json` | Wokwi circuit layout |
+| `gpio_analog_sensing.spice` | ngspice netlist (three LDR conditions swept) |
+| `gpio_analog_sensing.gc` | GnuCap batch script |
+| `schematic.png` | Auto-generated schematic |
+| `breadboard.md` | Step-by-step wiring guide with abbreviations and wire selections |
+| `README.md` | Build, calibration, and noise-measurement guides |
+| `docs/` | `calibration_guide.md`, `noise_measurement.md`, `drift_measurement.md` |
+
+---
+
+## Planned stages
+
+These stages use only parts already in [docs/inventory.md](docs/inventory.md):
+
+| Stage | Topic | Key new parts |
+|-------|-------|---------------|
+| 6 | PWM LED brightness control | LED (already have), 220 Ω (already have) |
+| 7 | Interrupt-driven button input | Push button (already have), 10 kΩ (already have) |
+| 8 | I2C LCD display | I2C LCD 1602 (already have — also used in stage 5) |
 
 ---
 
@@ -97,79 +188,118 @@ full build, calibration, and noise-measurement guides.
 
 - All circuits use 3.3 V logic
 - GPIO pins are not 5 V tolerant
-- Always use a resistor with LEDs
-- See [micropico/README.md](micropico/README.md) for MicroPython device
-  scripts and the component inventory
-
----
-
-## Structure
-
-```
-gpio_led_single/
-    test.spice  test.gc  schematic.png  breadboard.md
-
-gpio_led_parallel/
-    test2.spice  test2.gc  schematic.png  breadboard.md
-
-gpio_led_basic/
-    main.py  diagram.json  gpio_led_basic.spice  gpio_led_basic.gc
-    schematic.png  breadboard.md  README.md
-
-gpio_button_timing/
-    main.py  diagram.json  gpio_button_timing.spice  gpio_button_timing.gc
-    schematic.png  breadboard.md  README.md
-
-gpio_analog_sensing/
-    main.py  calibration.py  diagram.json
-    gpio_analog_sensing.spice  gpio_analog_sensing.gc
-    schematic.png  breadboard.md  README.md
-    docs/  (calibration_guide.md  noise_measurement.md  drift_measurement.md)
-
-micropico/
-    main.py  README.md
-
-lib/
-    lcd1602.py  ws2812.py
-
-docs/
-    inventory.md
-
-tools/
-    spice_to_schematic.py
-```
+- Always use a current-limiting resistor with LEDs
+- See [micropico/README.md](micropico/README.md) for device-level scripts
+- See [docs/inventory.md](docs/inventory.md) for the full component list and
+  wire catalogue
 
 ---
 
 ## Running simulations
 
-Each `gpio_*/` directory has matching SPICE and GnuCap batch files.
+Each stage folder contains **two** simulation files:
+
+| Tool | Invocation | What it does |
+|------|------------|--------------|
+| **GnuCap** | `gnucap -b <file>.gc` | Runs the circuit analysis defined in the `.gc` batch script (DC sweep, AC, transient). Outputs results to stdout. Fast; good for quick sanity-checks. |
+| **ngspice** | `ngspice -b <file>.spice` | Runs the SPICE netlist. Wider component-model support and more detailed output than GnuCap. Use for `.op` operating-point analysis and waveform inspection. |
+
+You do **not** need to run both for every build — pick one and compare the
+predicted currents/voltages to your meter readings.  GnuCap is faster for
+quick checks; ngspice is more detailed.
+
+Run simulations per-stage, before wiring that stage:
 
 ```bash
-# GnuCap (batch mode)
-gnucap -b gpio_led_basic/gpio_led_basic.gc
-gnucap -b gpio_button_timing/gpio_button_timing.gc
-gnucap -b gpio_analog_sensing/gpio_analog_sensing.gc
+# Stage 1
+gnucap -b led_single/test.gc
+# or
+ngspice -b led_single/test.spice
 
-# ngspice (batch mode)
-ngspice -b gpio_led_basic/gpio_led_basic.spice
-ngspice -b gpio_button_timing/gpio_button_timing.spice
-ngspice -b gpio_analog_sensing/gpio_analog_sensing.spice
+# Stage 2
+gnucap -b led_parallel/test2.gc
+
+# Stage 3
+gnucap -b gpio_led_basic/gpio_led_basic.gc
+
+# Stage 4
+gnucap -b gpio_button_timing/gpio_button_timing.gc
+
+# Stage 5
+gnucap -b gpio_analog_sensing/gpio_analog_sensing.gc
 ```
 
 Run from the repo root. Output goes to stdout.
 
 ---
 
-## Next steps
+## Repo structure
 
-Planned progression:
+```
+led_single/
+    test.spice          ngspice netlist
+    test.gc             GnuCap batch script
+    schematic.png       auto-generated schematic
+    breadboard.md       wiring guide
 
-| Stage | Topic | Key files |
-|-------|-------|-----------|
-| 1 | GPIO output (LED) | `gpio_led_basic/main.py` |
-| 2 | GPIO input + timing (button) | `gpio_button_timing/main.py` |
-| 3 | ADC / analog sensing | `gpio_analog_sensing/main.py` |
-| 4 | PWM signal generation | (planned) |
-| 5 | Interrupt-driven input | (planned) |
-| 6 | I2C / SPI peripherals | (planned) |
+led_parallel/
+    test2.spice         ngspice netlist
+    test2.gc            GnuCap batch script
+    schematic.png
+    breadboard.md
+
+gpio_led_basic/
+    main.py             MicroPython blink loop
+    diagram.json        Wokwi layout
+    gpio_led_basic.spice
+    gpio_led_basic.gc
+    schematic.png
+    breadboard.md
+    README.md
+
+gpio_button_timing/
+    main.py             MicroPython button-timing loop
+    diagram.json
+    gpio_button_timing.spice
+    gpio_button_timing.gc
+    schematic.png
+    breadboard.md
+    README.md
+
+gpio_analog_sensing/
+    main.py             ADC read + LCD display
+    calibration.py      calibration helper
+    diagram.json
+    gpio_analog_sensing.spice
+    gpio_analog_sensing.gc
+    schematic.png
+    breadboard.md
+    README.md
+    docs/
+        calibration_guide.md
+        noise_measurement.md
+        drift_measurement.md
+
+gpio_pwm_led/           (stage 6 — planned)
+    bom.md
+
+gpio_interrupt_button/  (stage 7 — planned)
+    bom.md
+
+gpio_i2c_lcd/           (stage 8 — planned)
+    bom.md
+
+micropico/
+    main.py             general-purpose device entry point
+    README.md
+
+lib/
+    lcd1602.py          I2C LCD 1602 driver
+    ws2812.py           WS2812 RGB LED strip driver
+
+docs/
+    inventory.md        full component and wire catalogue
+
+tools/
+    spice_to_schematic.py   generate schematic.png from a .spice file
+```

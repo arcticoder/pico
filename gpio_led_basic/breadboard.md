@@ -13,21 +13,26 @@ GP17 drives 3.3 V when HIGH; the resistor limits forward current to a safe
 
 ## Pico pinout reference (USB port faces up, cols 1–20)
 
-Pico straddles the centre channel.  Left-column pins → row **c**
-(cols 1–20).  Right-column pins → row **h** (cols 1–20).  Col 1 is the
-USB end; col 20 is the opposite (chip) end.
+The Pico straddles the centre channel with the **USB port at the top**.
+Left-column pins land in row **c** (holes c1–c20); right-column pins in row
+**h** (h1–h20). Col 1 is the USB end; col 20 is the chip end.
+
+A breadboard's terminal strips run **horizontally**: all five holes in a
+single row (e.g. row 22 holes A–E) share one node. The centre channel
+breaks the connection — row 22 A–E is isolated from row 22 F–J. Power
+rails on the outer edges run **vertically** (the entire red column is one node).
 
 | Col | Row c (left side)  | Row h (right side) |
-|-----|--------------------|--------------------|
-| 1   | VBUS               | (RUN / debug)      |
-| 2   | VSYS               | GND                |
-| 3   | **GND** ←          | GP0                |
-| 4   | 3V3_EN             | GP1                |
-| 5   | 3V3_OUT            | GP2                |
-| … | …                  | …                  |
-| 18  | **GP17** ← output  | GND                |
-| 19  | GP16               | GP13               |
-| 20  | GP15               | GP14               |
+|-----|--------------------|--------------------------|
+| 1   | VBUS               | RUN                      |
+| 2   | VSYS               | GND                      |
+| 3   | **GND.1** ←        | GP0                      |
+| 4   | 3V3_EN             | GP1                      |
+| 5   | 3V3                | GP2                      |
+| … | …                  | …                        |
+| 18  | **GP17** ← output  | GND                      |
+| 19  | GP16               | GP13                     |
+| 20  | GP15               | GP14                     |
 
 > GP17 is on the **left side**, col 18, row **c** → breadboard hole **c18**.
 
@@ -35,12 +40,12 @@ USB end; col 20 is the opposite (chip) end.
 
 ## Parts required
 
-| Component          | Value | Quantity |
-|--------------------|-------|----------|
-| LED (red)          | —     | 1        |
-| Resistor           | 220 Ω | 1        |
-| Jumper wire (green)| —     | 1        |
-| Jumper wire (black)| —     | 1        |
+| Component                  | Value | Quantity |
+|----------------------------|-------|----------|
+| LED (red)                  | —     | 1        |
+| Resistor                   | 220 Ω | 1        |
+| Jump wire — green, 1.0 cm  | —     | 1        |
+| Jump wire — black, 1.5 cm  | —     | 1        |
 
 ---
 
@@ -48,9 +53,9 @@ USB end; col 20 is the opposite (chip) end.
 
 ### 1. Connect GND to power rail
 
-| From                        | To                       | Wire color |
-|-----------------------------|--------------------------|------------|
-| Pico **GND** (c3)           | Top blue power rail (−)  | Black      |
+| From                  | To                       | Wire                     |
+|-----------------------|--------------------------|---------------------------|
+| Pico **GND.1** (c3)   | Top blue power rail (−)  | Black jump wire, 1.5 cm  |
 
 ### 2. Place the resistor (220 Ω)
 
@@ -59,9 +64,9 @@ USB end; col 20 is the opposite (chip) end.
 
 Add signal wire from GP17 to resistor input:
 
-| From                     | To             | Wire color |
-|--------------------------|----------------|------------|
-| Pico **GP17** (c18)      | Row 22, col a  | Green      |
+| From                     | To             | Wire                   |
+|--------------------------|----------------|------------------------|
+| Pico **GP17** (c18)      | Row 22, col A  | Green jump wire, 1.0 cm|
 
 ### 3. Place the LED
 
@@ -72,23 +77,26 @@ Add signal wire from GP17 to resistor input:
 
 ### 4. Connect LED cathode to ground
 
-| From           | To                      | Wire color |
-|----------------|-------------------------|------------|
-| Row 26, col a  | Top blue power rail (−) | Black      |
+| From           | To                      | Wire                     |
+|----------------|-------------------------|---------------------------|
+| Row 26, col A  | Top blue power rail (−) | Black jump wire, 1.5 cm  |
 
 ---
 
 ## Summary diagram
 
 ```
-Pico GP17 (c18) ──── [R1 220Ω]  rows 22–24, col a
+Pico GP17 (c18) ──── [R1 220Ω]  rows 22–24, col A
                                   │
-                               LED anode   row 24, col a
+                               LED anode   row 24, col A
                                   │
-                               LED cathode row 26, col a
+                               LED cathode  row 26, col A
                                   │
                               GND rail (−)
 ```
+
+> Terminal strips connect horizontally (A–E share one node per row).
+> The resistor and LED share col A because they are in the same row half.
 
 ---
 
