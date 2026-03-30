@@ -1,4 +1,4 @@
-# Breadboard Wiring — Parallel LED Pair (test2.spice / test2.gc)
+# Breadboard Wiring — Parallel LED Pair (test2.spice)
 
 ## Circuit overview
 
@@ -7,29 +7,30 @@ Two LEDs in **parallel** from the same 3.3 V supply, each with its own
 safe currents simultaneously, and that total draw from the 3.3 V rail stays
 comfortable.
 
-**Equivalent to:** `test2.spice` / `test2.gc`
+**Equivalent to:** `test2.spice`
 
 ---
 
-## Pico pin reference (USB port faces up, cols 1–20)
+## Pico pin reference (USB port faces up, rows 1–20)
 
 The Pico straddles the centre channel with the **USB port at the top**.
-Left-column pins land in row **c** (holes c1–c20); right-column pins in row
-**h** (h1–h20). Col 1 is the USB end; col 20 is the chip end.
+Left-column pins land in column **h** (holes h1–h20); right-column pins in
+column **c** (c1–c20). Row 1 is the USB end; row 20 is the chip end.
 
 A breadboard's terminal strips run **horizontally**: all five holes in a
 single row (e.g. row 22 holes A–E) share one node. The centre channel
 breaks the connection — row 22 A–E is isolated from row 22 F–J. Power
-rails on the outer edges run **vertically** (the entire red column is one node).
+rails on the left and right edges run **vertically** (the entire red or blue
+strip is one node).
 
-| Col | Row c (left side) | Row h (right side) |
-|-----|-------------------|--------------------------|
-| 1   | VBUS              | RUN                      |
-| 2   | VSYS              | GND                      |
-| 3   | **GND.1** ←       | GP0                      |
-| 4   | 3V3_EN            | GP1                      |
-| 5   | **3V3** ←         | GP2                      |
-| … | …                 | …                        |
+| Row | Col h (left side) | Col c (right side)        |
+|-----|-------------------|---------------------------|
+| 1   | GP0               | VBUS                      |
+| 2   | GP1               | VSYS                      |
+| 3   | GND.1             | **GND.8** ←               |
+| 4   | GP2               | 3V3_EN                    |
+| 5   | GP3               | **3V3** ←                 |
+| …   | …                 | …                         |
 
 ---
 
@@ -50,21 +51,21 @@ rails on the outer edges run **vertically** (the entire red column is one node).
 
 | From                   | To                       | Wire                        |
 |------------------------|--------------------------|-----------------------------|
-| Pico **3V3** (c5)      | Top red power rail (+)   | Red jump wire, 2.5 cm      |
-| Pico **GND.1** (c3)    | Top blue power rail (−)  | Black jump wire, 1.5 cm    |
+| Pico **3V3** (c5)      | Right power rail (+)    | Red jump wire, 2.5 cm      |
+| Pico **GND.8** (c3)    | Right power rail (−)    | Black jump wire, 1.5 cm    |
 
-### 2. LED branch 1 (left branch)
+### 2. LED branch 1 (right branch)
 
 Place **R1 (470 Ω)**:
 - One leg at row 22, col A  
 - Other leg at row 22, col C
 
 Because the terminal strip connects all holes in the same row horizontally,
-cols A–C are on the same node (left half). The resistor body bridges them.
+cols A–C are on the same node (right half, cols A–E). The resistor body bridges them.
 
 | From             | To             | Wire                    |
 |------------------|----------------|-------------------------|
-| Top red rail (+) | Row 22, col A  | Red jump wire, 2.5 cm  |
+| Right power rail (+) | Row 22, col A  | Red jump wire, 2.5 cm  |
 
 Place **LED1** (the centre channel separates the two halves):
 
@@ -73,13 +74,13 @@ Place **LED1** (the centre channel separates the two halves):
 | Anode (+)     | Row 22, col C |
 | Cathode (−)   | Row 24, col C |
 
-| From          | To                  | Wire                     |
-|---------------|---------------------|---------------------------|
-| Row 24, col C | Top blue rail (−)   | Black jump wire, 1.5 cm  |
+| From          | To                      | Wire                     |
+|---------------|-------------------------|---------------------------|
+| Row 24, col C | Right power rail (−)    | Black jump wire, 1.5 cm  |
 
-### 3. LED branch 2 (right branch)
+### 3. LED branch 2 (left branch)
 
-Place **R2 (470 Ω)** on the **right half** of the breadboard (cols F–J).
+Place **R2 (470 Ω)** on the **left half** of the breadboard (cols F–J).
 The centre channel ensures this branch is electrically independent of branch 1.
 
 - One leg at row 22, col F  
@@ -87,7 +88,7 @@ The centre channel ensures this branch is electrically independent of branch 1.
 
 | From             | To             | Wire                    |
 |------------------|----------------|-------------------------|
-| Top red rail (+) | Row 22, col F  | Red jump wire, 2.5 cm  |
+| Right power rail (+) | Row 22, col F  | Red jump wire, 2.5 cm  |
 
 Place **LED2**:
 
@@ -96,9 +97,9 @@ Place **LED2**:
 | Anode (+)     | Row 22, col H |
 | Cathode (−)   | Row 24, col H |
 
-| From          | To                  | Wire                     |
-|---------------|---------------------|---------------------------|
-| Row 24, col H | Top blue rail (−)   | Black jump wire, 1.5 cm  |
+| From          | To                      | Wire                     |
+|---------------|-------------------------|---------------------------|
+| Row 24, col H | Right power rail (−)    | Black jump wire, 1.5 cm  |
 
 ---
 
@@ -119,7 +120,7 @@ value and both LEDs are the same type/color.
 ## Simulation vs. breadboard
 
 ```bash
-gnucap -b led_parallel/test2.gc
+ngspice -b led_parallel/test2.spice
 ```
 
 The `i(D1)` and `i(D2)` columns should be equal (symmetric branches) and

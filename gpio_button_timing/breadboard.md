@@ -14,28 +14,29 @@ button is held and logs press/release timestamps.
 
 ---
 
-## Pico pinout reference (USB port faces up, cols 1–20)
+## Pico pinout reference (USB port faces up, rows 1–20)
 
 The Pico straddles the centre channel with the **USB port at the top**.
-Left-column pins land in row **c** (holes c1–c20); right-column pins in row
-**h** (h1–h20). Col 1 is the USB end; col 20 is the chip end.
+Left-column pins land in column **h** (holes h1–h20); right-column pins in
+column **c** (c1–c20). Row 1 is the USB end; row 20 is the chip end.
 
 A breadboard's terminal strips run **horizontally**: all five holes in a
 single row (e.g. row 22 holes A–E) share one node. The centre channel
 breaks the connection — row 22 A–E is isolated from row 22 F–J. Power
-rails on the outer edges run **vertically** (the entire red column is one node).
+rails on the left and right edges run **vertically** (the entire red or blue
+strip is one node).
 
-| Col | Row c (left side)       | Row h (right side)       |
-|-----|-------------------------|--------------------------|
-| 1   | VBUS                    | RUN                      |
-| 2   | VSYS                    | GND                      |
-| 3   | **GND.1** ←             | GP0                      |
-| 4   | 3V3_EN                  | GP1                      |
-| 5   | **3V3** ←               | GP2                      |
-| … | …                       | …                        |
-| 18  | **GP17** ← LED out      | GND                      |
-| 19  | **GP16** ← btn in       | GP13                     |
-| 20  | GP15                    | GP14                     |
+| Row | Col h (left side)       | Col c (right side)      |
+|-----|-------------------------|-------------------------|
+| 1   | GP0                     | VBUS                    |
+| 2   | GP1                     | VSYS                    |
+| 3   | GND.1                   | **GND.8** ←             |
+| 4   | GP2                     | 3V3_EN                  |
+| 5   | GP3                     | **3V3** ←               |
+| …   | …                       | …                       |
+| 18  | GND.4                   | GND.6                   |
+| 19  | GP14                    | **GP17** ← LED out      |
+| 20  | GP15                    | **GP16** ← btn in       |
 
 ---
 
@@ -60,8 +61,8 @@ rails on the outer edges run **vertically** (the entire red column is one node).
 
 | From                      | To                       | Wire                        |
 |---------------------------|--------------------------|-----------------------------|
-| Pico **3V3** (c5)         | Top red power rail (+)   | Red jump wire, 2.5 cm      |
-| Pico **GND.1** (c3)       | Top blue power rail (−)  | Black jump wire, 1.5 cm    |
+| Pico **3V3** (c5)         | Right power rail (+)    | Red jump wire, 2.5 cm      |
+| Pico **GND.8** (c3)       | Right power rail (−)    | Black jump wire, 1.5 cm    |
 
 ---
 
@@ -72,12 +73,12 @@ rows 22–24 in col F (right half); the LED follows below it.
 
 | Step | From                     | To                | Wire                       |
 |------|--------------------------|-------------------|---------|
-| a    | Pico **GP17** (c18)      | Row 22, col F     | Green jump wire, 1.0 cm   |
+| a    | Pico **GP17** (c19)      | Row 22, col F     | Green jump wire, 1.0 cm   |
 | b    | Resistor 220 Ω leg 1    | Row 22, col F     | —                          |
 | c    | Resistor 220 Ω leg 2    | Row 24, col E     | —                          |
 | d    | **LED anode (+)**        | Row 24, col E     | —                          |
 | e    | **LED cathode (−)**      | Row 26, col E     | —                          |
-| f    | Row 26, col E            | Blue rail (−)     | Black jump wire, 1.5 cm    |
+| f    | Row 26, col E            | Right power rail (−)   | Black jump wire, 1.5 cm    |
 
 ---
 
@@ -88,34 +89,34 @@ ensures GP16 reads 0 V when the button is open.
 
 | Step | From                     | To                  | Wire color |
 |------|--------------------------|---------------------|------------|
-| a    | Red rail (+) / 3V3       | Row 30, col f       | Red        |
+| a    | Right power rail (+)     | Row 30, col f       | Red        |
 | b    | Push button pin 2 (right)| Row 30, col f       | —          |
 | c    | Push button pin 1 (left) | Row 30, col a       | —          |
-| d    | Pico **GP16** (c19)      | Row 30, col a       | Blue       |
+| d    | Pico **GP16** (c20)      | Row 30, col a       | Blue       |
 | e    | Pull-down resistor (10 kΩ) leg 1 | Row 30, col a | —        |
 | f    | Pull-down resistor leg 2 | Row 32, col a       | —          |
-| g    | Row 32, col a            | Blue rail (−)       | Black      |
+| g    | Row 32, col a            | Right power rail (−)  | Black      |
 
 ---
 
 ## Summary diagram
 
 ```
-Pico GP17 (c18)
+Pico GP17 (c19)
       │
-   [R_limit 220Ω]   rows 22–24, col F (right half)
+   [R_limit 220Ω]   rows 22–24, col F (left half)
       │
-   LED anode        row 24, col E (left half)
+   LED anode        row 24, col E (right half)
       │
    LED cathode      row 26, col E
       │
    GND rail (−)
 
-Pico 3V3 (c5) ────> Red rail
+Pico 3V3 (c5) ────> Right power rail
                          │
                    [Button closed]
                          │
-Pico GP16 (c19) ──> Row 30, col A ── [R_pull 10kΩ] ── GND
+Pico GP16 (c20) ──> Row 30, col A ── [R_pull 10kΩ] ── GND
 ```
 
 ---
@@ -132,7 +133,7 @@ Pico GP16 (c19) ──> Row 30, col A ── [R_pull 10kΩ] ── GND
 ## Simulation
 
 ```bash
-gnucap -b gpio_button_timing/gpio_button_timing.gc
+ngspice -b gpio_button_timing/gpio_button_timing.spice
 ```
 
 * `i(D_led)` at 3.3 V ≈ 5.9 mA (safe)

@@ -54,6 +54,28 @@ Requirements: Raspberry Pi Pico with MicroPython firmware, USB data cable.
 2. Download the MicroPython UF2 from https://micropython.org/download/rp2/
 3. Copy the UF2 onto the drive.  The Pico reboots into MicroPython.
 
+### Running on WSL (Windows 11)
+
+If you are running WSL on Windows 11, the Pico's USB serial port is not
+automatically visible inside WSL.  You need `usbipd` on the Windows side:
+
+```pwsh
+# In a Windows PowerShell or CMD window (run once per session)
+usbipd attach --busid <X-Y> --wsl --auto-attach
+```
+
+Replace `<X-Y>` with the bus ID shown by `usbipd list` for your Pico.  The
+`--auto-attach` flag keeps the device attached if it resets.  When the
+attachment succeeds, `/dev/ttyACM0` will appear inside WSL and `mpremote`
+will find the device automatically.
+
+Without this step you will see:
+
+```bash
+mpremote cp gpio_led_basic/main.py :main.py
+# mpremote: no device found
+```
+
 ### Upload code with mpremote
 
 [mpremote](https://docs.micropython.org/en/latest/reference/mpremote.html) is
@@ -63,11 +85,8 @@ the official MicroPython CLI tool for file transfer and REPL access.
 # Install (conda / pip)
 pip install mpremote        # version 1.27.0 used here
 
-# Copy main.py from a project to the Pico
+# Copy a project's main.py to the Pico
 mpremote cp gpio_led_basic/main.py :main.py
-
-# Open the REPL to see print() output
-mpremote repl
 
 # List files on the Pico
 mpremote ls
@@ -75,6 +94,16 @@ mpremote ls
 # Run a script without copying it (useful for testing)
 mpremote run gpio_led_basic/main.py
 ```
+
+To open the interactive REPL and see `print()` output:
+
+```bash
+mpremote repl
+```
+
+`mpremote repl` is an interactive session (exit with Ctrl-] or Ctrl-x).
+Other `mpremote` sub-commands (`ls`, `cp`, `run`) are separate shell commands
+— do **not** type them at the `>>>` REPL prompt.
 
 The script stored as `main.py` on the Pico runs automatically on power-up.
 
@@ -84,7 +113,7 @@ The script stored as `main.py` on the Pico runs automatically on power-up.
 
 Work through these stages in order.  Each stage has its own folder with a
 README, simulation files, and breadboard wiring guide.  You can simulate
-before building — run the GnuCap or ngspice script to predict voltages and
+before building — run the ngspice script to predict voltages and
 currents before placing a single component.
 
 ---
@@ -97,7 +126,7 @@ safe current from the Pico's 3.3 V output pin when power is applied.
 | File | Purpose |
 |------|---------|
 | `test.spice` | ngspice netlist — DC sweep 0 V → 3.3 V |
-| `test.gc` | GnuCap batch script — same sweep |
+
 | `schematic.png` | Auto-generated schematic from `test.spice` |
 | `breadboard.md` | Step-by-step wiring guide with wire selections |
 
@@ -111,7 +140,7 @@ rail.  Confirms that two branches stay within safe current limits simultaneously
 | File | Purpose |
 |------|---------|
 | `test2.spice` | ngspice netlist |
-| `test2.gc` | GnuCap batch script |
+
 | `schematic.png` | Auto-generated schematic |
 | `breadboard.md` | Step-by-step wiring guide with wire selections |
 
@@ -127,7 +156,6 @@ runs a blink loop.
 | `main.py` | MicroPython blink loop |
 | `diagram.json` | Wokwi circuit layout |
 | `gpio_led_basic.spice` | ngspice netlist |
-| `gpio_led_basic.gc` | GnuCap batch script |
 | `schematic.png` | Auto-generated schematic |
 | `breadboard.md` | Step-by-step wiring guide |
 | `README.md` | Build and run instructions |
@@ -144,7 +172,6 @@ LED on while the button is held and logs press/release timestamps to the REPL.
 | `main.py` | MicroPython button-timing loop |
 | `diagram.json` | Wokwi circuit layout |
 | `gpio_button_timing.spice` | ngspice netlist |
-| `gpio_button_timing.gc` | GnuCap batch script |
 | `schematic.png` | Auto-generated schematic |
 | `breadboard.md` | Step-by-step wiring guide |
 | `README.md` | Build and run instructions |
@@ -164,7 +191,6 @@ readings.
 | `calibration.py` | Calibration helper script |
 | `diagram.json` | Wokwi circuit layout |
 | `gpio_analog_sensing.spice` | ngspice netlist (three LDR conditions swept) |
-| `gpio_analog_sensing.gc` | GnuCap batch script |
 | `schematic.png` | Auto-generated schematic |
 | `breadboard.md` | Step-by-step wiring guide with abbreviations and wire selections |
 | `README.md` | Build, calibration, and noise-measurement guides |
@@ -197,39 +223,27 @@ These stages use only parts already in [docs/inventory.md](docs/inventory.md):
 
 ## Running simulations
 
-Each stage folder contains **two** simulation files:
-
-| Tool | Invocation | What it does |
-|------|------------|--------------|
-| **GnuCap** | `gnucap -b <file>.gc` | Runs the circuit analysis defined in the `.gc` batch script (DC sweep, AC, transient). Outputs results to stdout. Fast; good for quick sanity-checks. |
-| **ngspice** | `ngspice -b <file>.spice` | Runs the SPICE netlist. Wider component-model support and more detailed output than GnuCap. Use for `.op` operating-point analysis and waveform inspection. |
-
-You do **not** need to run both for every build — pick one and compare the
-predicted currents/voltages to your meter readings.  GnuCap is faster for
-quick checks; ngspice is more detailed.
-
-Run simulations per-stage, before wiring that stage:
+Each stage folder contains an ngspice `.spice` netlist.  Run it with
+`ngspice -b` to predict voltages and currents before building that stage.
 
 ```bash
-# Stage 1
-gnucap -b led_single/test.gc
-# or
+# Stage 1 — static LED
 ngspice -b led_single/test.spice
 
-# Stage 2
-gnucap -b led_parallel/test2.gc
+# Stage 2 — parallel LEDs
+ngspice -b led_parallel/test2.spice
 
-# Stage 3
-gnucap -b gpio_led_basic/gpio_led_basic.gc
+# Stage 3 — GPIO LED
+ngspice -b gpio_led_basic/gpio_led_basic.spice
 
-# Stage 4
-gnucap -b gpio_button_timing/gpio_button_timing.gc
+# Stage 4 — button timing
+ngspice -b gpio_button_timing/gpio_button_timing.spice
 
-# Stage 5
-gnucap -b gpio_analog_sensing/gpio_analog_sensing.gc
+# Stage 5 — analog sensing
+ngspice -b gpio_analog_sensing/gpio_analog_sensing.spice
 ```
 
-Run from the repo root. Output goes to stdout.
+Run from the repo root.  Output goes to stdout with labeled column headers.
 
 ---
 
@@ -238,13 +252,11 @@ Run from the repo root. Output goes to stdout.
 ```
 led_single/
     test.spice          ngspice netlist
-    test.gc             GnuCap batch script
     schematic.png       auto-generated schematic
     breadboard.md       wiring guide
 
 led_parallel/
     test2.spice         ngspice netlist
-    test2.gc            GnuCap batch script
     schematic.png
     breadboard.md
 
@@ -252,7 +264,6 @@ gpio_led_basic/
     main.py             MicroPython blink loop
     diagram.json        Wokwi layout
     gpio_led_basic.spice
-    gpio_led_basic.gc
     schematic.png
     breadboard.md
     README.md
@@ -261,7 +272,6 @@ gpio_button_timing/
     main.py             MicroPython button-timing loop
     diagram.json
     gpio_button_timing.spice
-    gpio_button_timing.gc
     schematic.png
     breadboard.md
     README.md
@@ -271,7 +281,6 @@ gpio_analog_sensing/
     calibration.py      calibration helper
     diagram.json
     gpio_analog_sensing.spice
-    gpio_analog_sensing.gc
     schematic.png
     breadboard.md
     README.md

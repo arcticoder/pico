@@ -11,30 +11,31 @@ GP17 drives 3.3 V when HIGH; the resistor limits forward current to a safe
 
 ---
 
-## Pico pinout reference (USB port faces up, cols 1–20)
+## Pico pinout reference (USB port faces up, rows 1–20)
 
 The Pico straddles the centre channel with the **USB port at the top**.
-Left-column pins land in row **c** (holes c1–c20); right-column pins in row
-**h** (h1–h20). Col 1 is the USB end; col 20 is the chip end.
+Left-column pins land in column **h** (holes h1–h20); right-column pins in
+column **c** (c1–c20). Row 1 is the USB end; row 20 is the chip end.
 
 A breadboard's terminal strips run **horizontally**: all five holes in a
 single row (e.g. row 22 holes A–E) share one node. The centre channel
 breaks the connection — row 22 A–E is isolated from row 22 F–J. Power
-rails on the outer edges run **vertically** (the entire red column is one node).
+rails on the left and right edges run **vertically** (the entire red or blue
+strip is one node).
 
-| Col | Row c (left side)  | Row h (right side) |
-|-----|--------------------|--------------------------|
-| 1   | VBUS               | RUN                      |
-| 2   | VSYS               | GND                      |
-| 3   | **GND.1** ←        | GP0                      |
-| 4   | 3V3_EN             | GP1                      |
-| 5   | 3V3                | GP2                      |
-| … | …                  | …                        |
-| 18  | **GP17** ← output  | GND                      |
-| 19  | GP16               | GP13                     |
-| 20  | GP15               | GP14                     |
+| Row | Col h (left side)  | Col c (right side)  |
+|-----|--------------------|---------------------|
+| 1   | GP0                | VBUS                |
+| 2   | GP1                | VSYS                |
+| 3   | GND.1              | **GND.8** ←         |
+| 4   | GP2                | 3V3_EN              |
+| 5   | GP3                | 3V3                 |
+| …   | …                  | …                   |
+| 18  | GND.4              | GND.6               |
+| 19  | GP14               | **GP17** ← output   |
+| 20  | GP15               | GP16                |
 
-> GP17 is on the **left side**, col 18, row **c** → breadboard hole **c18**.
+> GP17 is on the **right side**, row 19, column **c** → breadboard hole **c19**.
 
 ---
 
@@ -55,7 +56,7 @@ rails on the outer edges run **vertically** (the entire red column is one node).
 
 | From                  | To                       | Wire                     |
 |-----------------------|--------------------------|---------------------------|
-| Pico **GND.1** (c3)   | Top blue power rail (−)  | Black jump wire, 1.5 cm  |
+| Pico **GND.8** (c3)   | Right power rail (−)    | Black jump wire, 1.5 cm  |
 
 ### 2. Place the resistor (220 Ω)
 
@@ -66,7 +67,7 @@ Add signal wire from GP17 to resistor input:
 
 | From                     | To             | Wire                   |
 |--------------------------|----------------|------------------------|
-| Pico **GP17** (c18)      | Row 22, col A  | Green jump wire, 1.0 cm|
+| Pico **GP17** (c19)      | Row 22, col A  | Green jump wire, 1.0 cm|
 
 ### 3. Place the LED
 
@@ -77,16 +78,16 @@ Add signal wire from GP17 to resistor input:
 
 ### 4. Connect LED cathode to ground
 
-| From           | To                      | Wire                     |
-|----------------|-------------------------|---------------------------|
-| Row 26, col A  | Top blue power rail (−) | Black jump wire, 1.5 cm  |
+| From           | To                       | Wire                     |
+|----------------|--------------------------|---------------------------|
+| Row 26, col A  | Right power rail (−)    | Black jump wire, 1.5 cm  |
 
 ---
 
 ## Summary diagram
 
 ```
-Pico GP17 (c18) ──── [R1 220Ω]  rows 22–24, col A
+Pico GP17 (c19) ──── [R1 220Ω]  rows 22–24, col A
                                   │
                                LED anode   row 24, col A
                                   │

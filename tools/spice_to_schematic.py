@@ -15,7 +15,7 @@ Usage
 -----
   python spice_to_schematic.py <netlist.spice> [<output.png>]
 
-  If <output.png> is omitted the image is saved as <netlist>.png next to the
+  If <output.png> is omitted the image is saved as schematic.png next to the
   netlist file.
 
 Examples
@@ -200,8 +200,7 @@ def main():
     if len(sys.argv) >= 3:
         out_path = sys.argv[2]
     else:
-        base = os.path.splitext(spice_path)[0]
-        out_path = base + ".png"
+        out_path = os.path.join(os.path.dirname(os.path.abspath(spice_path)), "schematic.png")
 
     os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
 
