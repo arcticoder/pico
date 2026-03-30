@@ -74,9 +74,64 @@ Update quantities as components are used or added.
 | Breadboard (full)  | 1        | 830-point                                 |
 | Micro USB Cable    | 1        | For Pico power + data                     |
 | Jump Wires Box     | 1        |                                           |
-| Jumper Wires       | 65       | M-M; pre-cut various lengths              |
-| Dupont Wires       | 10       | M-F                                       |
 
+Jump Wires Box - left side
+| colour | length | quantity | 
+|--------|--------|----------|
+orange 2.25 14
+red 2.5 10
+black 1.5 14
+
+Jump Wires Box - middle left
+| colour | length | quantity | 
+|--------|--------|----------|
+white 1.5 14
+white 5 10
+yellow 2 12
+
+Jump Wires Box - middle right
+| colour | length | quantity | 
+|--------|--------|----------|
+black 0.4 10
+yellow 0.6 10
+green 1.0 8
+blue 1.25 9
+non-covered 0.25 13
+
+Jump Wires Box - middle top
+| colour | length | quantity | 
+|--------|--------|----------|
+green 7.5 10
+blue 10 10
+
+Jump Wires Box - middle bottom
+| colour | length | quantity | 
+|--------|--------|----------|
+red 12.6 10
+
+| Jumper Wires       | 65       | M-M; pre-cut various lengths              |
+
+| colour | length | quantity | 
+|--------|--------|----------|
+blue 16 2
+red 16 2
+black 16 2
+red 20
+blue 20
+white 20
+blue 25
+white 25
+red 25
+black 25
+white 12 7
+black 12 7
+orange 12 7
+blue 12 7
+green 12 7
+yellow 12 7
+red 12 7
+
+| Dupont Wires       | 10       | M-F                                       |
 ---
 
 ## Microcontroller
