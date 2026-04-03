@@ -143,3 +143,16 @@ All done, pushed as `bcb7c3d`. Summary:
 **Task 4** — All power-rail negative connections across all 5 files: `Black jump wire, 1.5 cm` → `Blue jump wire, 1.25 cm`. Parts tables updated. gpio_button_timing button-branch table also had the `Wire color` column heading replaced with `Wire` and colour-only values filled in with full specs.
 <!-- ------ -->
 ---
+Pushed as `c60cb6e`. Here's what changed and the answer to task 4:
+
+**Task 4 — gpio_analog_sensing: yes, keep building it.** The resistor-divider + ADC skill is exactly how you safely read kilovolt-range signals in stages 9–10: a precision voltage divider brings (say) 10 kV down to 3.3 V, and the Pico reads it. The potentiometer-as-calibration-reference pattern is directly reusable for HV calibration. It's on the critical path.
+
+**All changes made:**
+1. **Lines 1–8** — New title "Electrogravitics Research Platform" with description anchored to Valone2008 and the Biefeld-Brown goal
+2. **Lines 33–36** — Removed; only the gpio_analog_sensing schematic command remains
+3. **All mpremote examples** — Updated from gpio_led_basic to gpio_analog_sensing
+4. **Stages section** — Stages 1–4 removed entirely; stage 5 reframed as the HV measurement foundation with a direct callout to Valone §3
+5. **Planned stages** — New path: PWM output (stage 6) → MPU6050 IMU (stage 7) → LCD display (stage 8) → HV divider ADC (stage 9) → Biefeld-Brown asymmetric capacitor (stage 10)
+6. **Notes, simulations, repo structure** — All updated to match; HV safety flag added; Valone2008 reference added
+<!-- ------ -->
+---
