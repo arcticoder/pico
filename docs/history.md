@@ -132,3 +132,14 @@ All 20 issues resolved, pushed as `5ba6258`. Summary of what was done:
 - led_parallel: branch labels corrected (cols A–C are the right half, cols F–J are the left half after rotation)
 <!-- ------ -->
 ---
+All done, pushed as `bcb7c3d`. Summary:
+
+**Task 1** — README line 40: `<netlist-basename>.png` → `schematic.png` (matches actual tool behaviour).
+
+**Task 2** — README stages intro: removed the claim that every stage has a README.md. New text: *"Each stage has its own folder with simulation files and a breadboard wiring guide; stages 3–5 also include a README.md and MicroPython code."*
+
+**Task 3** — All power-rail positive connections across all 5 files: `Red jump wire, 2.5 cm` → `Orange jump wire, 2.25 cm`. Parts tables updated.
+
+**Task 4** — All power-rail negative connections across all 5 files: `Black jump wire, 1.5 cm` → `Blue jump wire, 1.25 cm`. Parts tables updated. gpio_button_timing button-branch table also had the `Wire color` column heading replaced with `Wire` and colour-only values filled in with full specs.
+<!-- ------ -->
+---
