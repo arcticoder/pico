@@ -40,4 +40,6 @@ micropico/.micropico
 # scratch/ is a KiCad workspace and local staging area — not tracked
 scratch/
 
-docs/related/*.*
+docs/related/**/*.pdf*
+docs/related/**/*.json
+docs/related/**/*.jpg
