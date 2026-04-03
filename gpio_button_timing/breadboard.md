@@ -49,9 +49,8 @@ strip is one node).
 | Push button                | —      | 1        |
 | Resistor (pull-down)       | 10 kΩ  | 1        |
 | Jump wire — green, 1.0 cm  | —      | 1        |
-| Jump wire — red, 2.5 cm    | —      | 1        |
-| Jump wire — black, 1.5 cm  | —      | 2        |
-| Jump wire — blue, 1.25 cm  | —      | 1        |
+| Jump wire — orange, 2.25 cm | —      | 2        |
+| Jump wire — blue, 1.25 cm   | —      | 4        |
 
 ---
 
@@ -61,8 +60,8 @@ strip is one node).
 
 | From                      | To                       | Wire                        |
 |---------------------------|--------------------------|-----------------------------|
-| Pico **3V3** (c5)         | Right power rail (+)    | Red jump wire, 2.5 cm      |
-| Pico **GND.8** (c3)       | Right power rail (−)    | Black jump wire, 1.5 cm    |
+| Pico **3V3** (c5)         | Right power rail (+)    | Orange jump wire, 2.25 cm  |
+| Pico **GND.8** (c3)       | Right power rail (−)    | Blue jump wire, 1.25 cm    |
 
 ---
 
@@ -78,7 +77,7 @@ rows 22–24 in col F (right half); the LED follows below it.
 | c    | Resistor 220 Ω leg 2    | Row 24, col E     | —                          |
 | d    | **LED anode (+)**        | Row 24, col E     | —                          |
 | e    | **LED cathode (−)**      | Row 26, col E     | —                          |
-| f    | Row 26, col E            | Right power rail (−)   | Black jump wire, 1.5 cm    |
+| f    | Row 26, col E            | Right power rail (−)   | Blue jump wire, 1.25 cm    |
 
 ---
 
@@ -87,15 +86,15 @@ rows 22–24 in col F (right half); the LED follows below it.
 The button bridges the 3.3 V rail to GP16.  A 10 kΩ pull-down resistor
 ensures GP16 reads 0 V when the button is open.
 
-| Step | From                     | To                  | Wire color |
-|------|--------------------------|---------------------|------------|
-| a    | Right power rail (+)     | Row 30, col f       | Red        |
-| b    | Push button pin 2 (right)| Row 30, col f       | —          |
-| c    | Push button pin 1 (left) | Row 30, col a       | —          |
-| d    | Pico **GP16** (c20)      | Row 30, col a       | Blue       |
-| e    | Pull-down resistor (10 kΩ) leg 1 | Row 30, col a | —        |
-| f    | Pull-down resistor leg 2 | Row 32, col a       | —          |
-| g    | Row 32, col a            | Right power rail (−)  | Black      |
+| Step | From                     | To                  | Wire                        |
+|------|--------------------------|---------------------|-----------------------------||
+| a    | Right power rail (+)     | Row 30, col f       | Orange jump wire, 2.25 cm   |
+| b    | Push button pin 2 (right)| Row 30, col f       | —                           |
+| c    | Push button pin 1 (left) | Row 30, col a       | —                           |
+| d    | Pico **GP16** (c20)      | Row 30, col a       | Blue jump wire, 1.25 cm     |
+| e    | Pull-down resistor (10 kΩ) leg 1 | Row 30, col a | —                     |
+| f    | Pull-down resistor leg 2 | Row 32, col a       | —                           |
+| g    | Row 32, col a            | Right power rail (−)  | Blue jump wire, 1.25 cm   |
 
 ---
 

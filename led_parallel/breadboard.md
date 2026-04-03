@@ -40,8 +40,8 @@ strip is one node).
 |------------------------------|-------|----------|
 | LED (any color)              | —     | 2        |
 | Resistor                     | 470 Ω | 2        |
-| Jump wire — red, 2.5 cm      | —     | 2        |
-| Jump wire — black, 1.5 cm    | —     | 2        |
+| Jump wire — orange, 2.25 cm  | —     | 3        |
+| Jump wire — blue, 1.25 cm    | —     | 3        |
 
 ---
 
@@ -51,8 +51,8 @@ strip is one node).
 
 | From                   | To                       | Wire                        |
 |------------------------|--------------------------|-----------------------------|
-| Pico **3V3** (c5)      | Right power rail (+)    | Red jump wire, 2.5 cm      |
-| Pico **GND.8** (c3)    | Right power rail (−)    | Black jump wire, 1.5 cm    |
+| Pico **3V3** (c5)      | Right power rail (+)    | Orange jump wire, 2.25 cm  |
+| Pico **GND.8** (c3)    | Right power rail (−)    | Blue jump wire, 1.25 cm    |
 
 ### 2. LED branch 1 (right branch)
 
@@ -65,7 +65,7 @@ cols A–C are on the same node (right half, cols A–E). The resistor body brid
 
 | From             | To             | Wire                    |
 |------------------|----------------|-------------------------|
-| Right power rail (+) | Row 22, col A  | Red jump wire, 2.5 cm  |
+| Right power rail (+) | Row 22, col A  | Orange jump wire, 2.25 cm  |
 
 Place **LED1** (the centre channel separates the two halves):
 
@@ -76,7 +76,7 @@ Place **LED1** (the centre channel separates the two halves):
 
 | From          | To                      | Wire                     |
 |---------------|-------------------------|---------------------------|
-| Row 24, col C | Right power rail (−)    | Black jump wire, 1.5 cm  |
+| Row 24, col C | Right power rail (−)    | Blue jump wire, 1.25 cm  |
 
 ### 3. LED branch 2 (left branch)
 
@@ -88,7 +88,7 @@ The centre channel ensures this branch is electrically independent of branch 1.
 
 | From             | To             | Wire                    |
 |------------------|----------------|-------------------------|
-| Right power rail (+) | Row 22, col F  | Red jump wire, 2.5 cm  |
+| Right power rail (+) | Row 22, col F  | Orange jump wire, 2.25 cm  |
 
 Place **LED2**:
 
@@ -99,7 +99,7 @@ Place **LED2**:
 
 | From          | To                      | Wire                     |
 |---------------|-------------------------|---------------------------|
-| Row 24, col H | Right power rail (−)    | Black jump wire, 1.5 cm  |
+| Row 24, col H | Right power rail (−)    | Blue jump wire, 1.25 cm  |
 
 ---
 

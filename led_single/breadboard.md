@@ -41,8 +41,8 @@ strip is one node).
 |--------------------------|-------|----------|
 | LED (any color)          | —     | 1        |
 | Resistor                 | 470 Ω | 1        |
-| Jump wire — red, 2.5 cm  | —     | 1        |
-| Jump wire — black, 1.5 cm| —     | 1        |
+| Jump wire — orange, 2.25 cm | —     | 2        |
+| Jump wire — blue, 1.25 cm   | —     | 2        |
 
 ---
 
@@ -52,8 +52,8 @@ strip is one node).
 
 | From                  | To                      | Wire                        |
 |-----------------------|-------------------------|--------------|
-| Pico **3V3** (c5)     | Right power rail (+)    | Red jump wire, 2.5 cm      |
-| Pico **GND.8** (c3)   | Right power rail (−)    | Black jump wire, 1.5 cm    |
+| Pico **3V3** (c5)     | Right power rail (+)    | Orange jump wire, 2.25 cm  |
+| Pico **GND.8** (c3)   | Right power rail (−)    | Blue jump wire, 1.25 cm    |
 
 ### 2. Place the resistor (470 Ω)
 
@@ -64,7 +64,7 @@ Add a short jumper:
 
 | From             | To             | Wire                    |
 |------------------|----------------|-------------------------|
-| Right power rail (+) | Row 22, col A  | Red jump wire, 2.5 cm  |
+| Right power rail (+) | Row 22, col A  | Orange jump wire, 2.25 cm  |
 
 ### 3. Place the LED
 
@@ -77,7 +77,7 @@ Add a short jumper:
 
 | From          | To                    | Wire                     |
 |---------------|------------------------|---------------------------|
-| Row 24, col C | Right power rail (−)  | Black jump wire, 1.5 cm  |
+| Row 24, col C | Right power rail (−)  | Blue jump wire, 1.25 cm  |
 
 ---
 

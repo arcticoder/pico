@@ -37,7 +37,7 @@ python tools/spice_to_schematic.py gpio_button_timing/gpio_button_timing.spice
 python tools/spice_to_schematic.py gpio_analog_sensing/gpio_analog_sensing.spice
 ```
 
-Output is written as `<netlist-basename>.png` next to the `.spice` file.
+Output is written as `schematic.png` in the same directory as the `.spice` file.
 `tools/spice_to_schematic.py` uses **schemdraw** to parse SPICE `R`, `C`,
 `V`, and `D` elements and render a schematic image.
 
@@ -111,8 +111,8 @@ The script stored as `main.py` on the Pico runs automatically on power-up.
 
 ## Stages (the project path)
 
-Work through these stages in order.  Each stage has its own folder with a
-README, simulation files, and breadboard wiring guide.  You can simulate
+Work through these stages in order.  Each stage has its own folder with simulation files and a breadboard
+wiring guide; stages 3–5 also include a `README.md` and MicroPython code.  You can simulate
 before building — run the ngspice script to predict voltages and
 currents before placing a single component.
 

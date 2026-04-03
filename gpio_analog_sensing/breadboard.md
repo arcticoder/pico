@@ -66,8 +66,8 @@ strip is one node).
 | LED (white)                  | LED_src  | —      | 1   |
 | Resistor (LED limit)         | R_led    | 220 Ω  | 1   |
 | I2C LCD 1602                 | LCD      | —      | 1   |
-| Jump wire — red, 2.5 cm      | —        | —      | 2   |
-| Jump wire — black, 1.5 cm    | —        | —      | 2   |
+| Jump wire — orange, 2.25 cm  | —        | —      | 4   |
+| Jump wire — blue, 1.25 cm    | —        | —      | 4   |
 | Jump wire — green, 1.0 cm    | —        | —      | 1   |
 | Dupont wire — cyan, 22 cm    | —        | —      | 1   |
 | Dupont wire — purple, 22 cm  | —        | —      | 1   |
@@ -82,8 +82,8 @@ strip is one node).
 
 | From                  | To                       | Wire                        |
 |-----------------------|--------------------------|-----------------------------|
-| Pico **3V3** (c5)     | Right power rail (+)     | Red jump wire, 2.5 cm      |
-| Pico **GND.8** (c3)   | Right power rail (−)     | Black jump wire, 1.5 cm    |
+| Pico **3V3** (c5)     | Right power rail (+)     | Orange jump wire, 2.25 cm  |
+| Pico **GND.8** (c3)   | Right power rail (−)     | Blue jump wire, 1.25 cm    |
 
 ---
 
@@ -93,11 +93,11 @@ The 10 kΩ fixed resistor sits **above** the midpoint; the LDR sits **below**.
 
 | Step | Component             | From          | To            | Wire                    |
 |------|-----------------------|---------------|---------------|-------------------------|
-| a    | Wire                  | Right power rail (+)  | Row 22, col A | Red jump wire, 2.5 cm  |
+| a    | Wire                  | Right power rail (+)  | Row 22, col A | Orange jump wire, 2.25 cm  |
 | b    | R_fixed (10 kΩ) leg 1 | Row 22, col A | Row 24, col A | —                       |
 | c    | R_fixed leg 2         | Row 24, col A | = V_mid node  | —                       |
 | d    | LDR leg 1             | Row 24, col B | = V_mid node  | —                       |
-| e    | LDR leg 2             | Row 26, col B | Right power rail (−) | Black jump wire, 1.5 cm|
+| e    | LDR leg 2             | Row 26, col B | Right power rail (−) | Blue jump wire, 1.25 cm|
 
 **V_mid signal wire (to ADC0):**
 
@@ -122,8 +122,8 @@ Connects V_mid to GND; bridging the gap is fine.
 
 | Pot terminal | Connection             | Wire                       |
 |--------------|------------------------|----------------------------|
-| VCC          | Right power rail (+)   | Red jump wire, 2.5 cm     |
-| GND          | Right power rail (−)   | Black jump wire, 1.5 cm   |
+| VCC          | Right power rail (+)   | Orange jump wire, 2.25 cm |
+| GND          | Right power rail (−)   | Blue jump wire, 1.25 cm   |
 | Wiper (SIG)  | Pico **GP27** (c9)     | Purple dupont wire, 22 cm |
 
 ---
@@ -139,7 +139,7 @@ Aim the LED toward the photoresistor for repeatable controlled illumination.
 | c    | R_led leg 2                | Row 42, col E  | —                         |
 | d    | LED anode (+)              | Row 42, col E  | —                         |
 | e    | LED cathode (−)            | Row 44, col E  | —                         |
-| f    | Row 44, col E              | Right power rail (−)  | Black jump wire, 1.5 cm  |
+| f    | Row 44, col E              | Right power rail (−)  | Blue jump wire, 1.25 cm  |
 
 ---
 
@@ -149,8 +149,8 @@ Use the **4-pin I2C backpack version**:
 
 | LCD pin | Connection             | Wire                        |
 |---------|------------------------|--------------|
-| GND     | Right power rail (−)     | Black jump wire, 1.5 cm    |
-| VCC     | Right power rail (+)     | Red jump wire, 2.5 cm      |
+| GND     | Right power rail (−)     | Blue jump wire, 1.25 cm    |
+| VCC     | Right power rail (+)     | Orange jump wire, 2.25 cm  |
 | SDA     | Pico **GP4** (h6)        | Blue dupont wire, 22 cm    |
 | SCL     | Pico **GP5** (h7)        | Yellow dupont wire, 22 cm  |
 

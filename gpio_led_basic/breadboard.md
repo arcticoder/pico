@@ -46,7 +46,7 @@ strip is one node).
 | LED (red)                  | —     | 1        |
 | Resistor                   | 220 Ω | 1        |
 | Jump wire — green, 1.0 cm  | —     | 1        |
-| Jump wire — black, 1.5 cm  | —     | 1        |
+| Jump wire — blue, 1.25 cm  | —     | 2        |
 
 ---
 
@@ -56,7 +56,7 @@ strip is one node).
 
 | From                  | To                       | Wire                     |
 |-----------------------|--------------------------|---------------------------|
-| Pico **GND.8** (c3)   | Right power rail (−)    | Black jump wire, 1.5 cm  |
+| Pico **GND.8** (c3)   | Right power rail (−)    | Blue jump wire, 1.25 cm  |
 
 ### 2. Place the resistor (220 Ω)
 
@@ -80,7 +80,7 @@ Add signal wire from GP17 to resistor input:
 
 | From           | To                       | Wire                     |
 |----------------|--------------------------|---------------------------|
-| Row 26, col A  | Right power rail (−)    | Black jump wire, 1.5 cm  |
+| Row 26, col A  | Right power rail (−)    | Blue jump wire, 1.25 cm  |
 
 ---
 
