@@ -168,6 +168,21 @@ Update quantities as components are used or added.
 
 ---
 
+## Power Supply & Protection Components
+
+For the `lab/` repo's spacetime research PSU tiers (`psu_ultralow`,
+`psu_low`). Full specs and datasheets in `lab/docs/orders.md` and
+`lab/docs/parts_reference.md`.
+
+| Component                              | Quantity | Notes                                                           |
+|------------------------------------------|----------|------------------------------------------------------------------|
+| Polyfuse RXEF005 (0.05A / 50mA)         | 20       | Received 2026-08-21; untested — validate each unit with `lab/fuse_test_voltmeter/` before trusting it near an LED |
+| Polyfuse RXEF050 (0.5A / 500mA)         | 20       | Received 2026-08-21; untested — same validation step as above    |
+| 1N5817 Schottky diode (1A 20V, DO-41)   | 20       | Received 2026-08-21; untested — verify forward drop/orientation per unit before use in `psu_low_v2` |
+| AA battery holder (1×AA, single-cell)  | 5        | Received 2026-08-21; ready for direct use in `psu_ultralow_v1`/`psu_low_v2` |
+
+---
+
 ## On Order (AliExpress — not yet received as of 2026-08-21)
 
 Placed for the `lab/` repo's spacetime research build; not yet counted in
@@ -182,7 +197,3 @@ above once physically received.
 | CD4066BCN (quad bilateral switch, DIP-14) | 10 | Analog switch/mux                              |
 | LM358P (dual op-amp, DIP-8)    | 10       | Budget op-amp for bring-up circuits                 |
 | TYPE-C Female Test Board (USB3.1 16P → 2.54mm) | 1 | Blue variant                                   |
-| Polyfuse RXEF005 (0.05A / 50mA) | 20      | `psu_ultralow` protection tier                      |
-| Polyfuse RXEF050 (0.5A / 500mA) | 20      | `psu_low` protection tier                           |
-| 1N5817 Schottky diode (1A 20V, DO-41) | 20 | `psu_low` reverse-polarity protection             |
-| AA battery holder (1×AA, single-cell) | 5  | `psu_ultralow`/`psu_low`                          |
