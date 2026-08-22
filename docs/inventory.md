@@ -69,10 +69,11 @@ Update quantities as components are used or added.
 
 ## Prototyping and Cables
 
-| Component          | Quantity | Notes                                     |
-|--------------------|----------|-------------------------------------------|
-| Breadboard (full)  | 1        | 830-point                                 |
-| Micro USB Cable    | 1        | For Pico power + data                     |
+| Component              | Quantity | Notes                                                    |
+|-------------------------|----------|-----------------------------------------------------------|
+| Breadboard (full)      | 1        | 830-point                                                 |
+| Breadboard (mini SYB-170) | 1     | 170-point, black; from a 6-in-1 color pack (AliExpress). See `lab/docs/orders.md` / `lab/docs/parts_reference.md` for full specs |
+| Micro USB Cable        | 1        | For Pico power + data                                     |
 
 ---
 
@@ -164,3 +165,24 @@ Update quantities as components are used or added.
 | Component              | Quantity | Notes                         |
 |------------------------|----------|-------------------------------|
 | Raspberry Pi Pico      | 1        | RP2040, no wireless           |
+
+---
+
+## On Order (AliExpress — not yet received as of 2026-08-21)
+
+Placed for the `lab/` repo's spacetime research build; not yet counted in
+the tables above. Full specs, links, and datasheets in `lab/docs/orders.md`
+and `lab/docs/parts_reference.md`. Move each row up into its proper table
+above once physically received.
+
+| Component                     | Quantity | Notes                                              |
+|--------------------------------|----------|-----------------------------------------------------|
+| Breadboard (mini SYB-170, 2pk) | 2        | Separate listing from the received black one above |
+| Breadboard (MB-102, 400-point) | 1        | 300 terminal + 100 distribution-bar tie points      |
+| CD4066BCN (quad bilateral switch, DIP-14) | 10 | Analog switch/mux                              |
+| LM358P (dual op-amp, DIP-8)    | 10       | Budget op-amp for bring-up circuits                 |
+| TYPE-C Female Test Board (USB3.1 16P → 2.54mm) | 1 | Blue variant                                   |
+| Polyfuse RXEF005 (0.05A / 50mA) | 20      | `psu_ultralow` protection tier                      |
+| Polyfuse RXEF050 (0.5A / 500mA) | 20      | `psu_low` protection tier                           |
+| 1N5817 Schottky diode (1A 20V, DO-41) | 20 | `psu_low` reverse-polarity protection             |
+| AA battery holder (1×AA, single-cell) | 5  | `psu_ultralow`/`psu_low`                          |
