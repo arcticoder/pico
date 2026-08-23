@@ -176,7 +176,7 @@ For the `lab/` repo's spacetime research PSU tiers (`psu_ultralow`,
 
 | Component                              | Quantity | Notes                                                           |
 |------------------------------------------|----------|------------------------------------------------------------------|
-| Polyfuse RXEF005 (0.05A / 50mA)         | 20       | Received 2026-08-21; untested — validate each unit with `lab/fuse_test_voltmeter/` before trusting it near an LED |
+| Polyfuse RXEF005 (0.05A / 50mA)         | 20       | Received 2026-08-21; untested — validate each unit with `lab/measurement_tools/fuse_test_voltmeter/` before trusting it near an LED |
 | Polyfuse RXEF050 (0.5A / 500mA)         | 20       | Received 2026-08-21; untested — same validation step as above    |
 | 1N5817 Schottky diode (1A 20V, DO-41)   | 20       | Received 2026-08-21; untested — verify forward drop/orientation per unit before use in `psu_low_v2` |
 | AA battery holder (1×AA, single-cell)  | 5        | Received 2026-08-21; ready for direct use in `psu_ultralow_v1`/`psu_low_v2` |
