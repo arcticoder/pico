@@ -10,7 +10,9 @@ Button input controls LED and logs press timing.
 - 10kΩ pull-down resistor
 
 ## Simulation
-Open `diagram.json` in Wokwi.
+```bash
+ngspice -b buttons/gpio_button_timing/gpio_button_timing.spice
+```
 
 ## Run
 Upload `main.py` to Pico as `main.py`.

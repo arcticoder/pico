@@ -6,8 +6,7 @@ Pico **GP17** blinks a red LED via a **220 Ω** current-limiting resistor.
 GP17 drives 3.3 V when HIGH; the resistor limits forward current to a safe
 ~5 mA.
 
-**Equivalent to:** `gpio_led_basic/diagram.json` (Wokwi) and
-`gpio_led_basic/gpio_led_basic.spice`
+**Equivalent to:** `leds/gpio_led_basic/gpio_led_basic.spice`
 
 ---
 

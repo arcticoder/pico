@@ -100,7 +100,7 @@ lower-value resistor (330 Ω). If it doesn't light at all, check polarity.
 Run the simulation to verify expected current before building:
 
 ```bash
-ngspice -b led_single/test.spice
+ngspice -b leds/led_single/test.spice
 ```
 
 The `i(D1)` column shows simulated diode current at each supply

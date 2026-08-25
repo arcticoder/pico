@@ -23,8 +23,8 @@ their own `gpio_*` directories at the repo root:
 |-----------|---------|
 | `gpio_led_single/` | Single LED + 470 Ω, 3.3 V (test.spice / test.gc) |
 | `gpio_led_parallel/` | Two parallel LEDs, 470 Ω each, 3.3 V (test2.spice / test2.gc) |
-| `gpio_led_basic/` | Pico GP17 → 220 Ω → LED (from Wokwi diagram) |
-| `gpio_button_timing/` | Button input + LED timing (from Wokwi diagram) |
+| `gpio_led_basic/` | Pico GP17 → 220 Ω → LED |
+| `gpio_button_timing/` | Button input + LED timing |
 | `gpio_analog_sensing/` | ADC / voltage-divider / calibration platform |
 
 ---

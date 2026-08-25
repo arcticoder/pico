@@ -1,37 +1,29 @@
-# Raspberry Pi Pico — Electrogravitics Research Platform
+# Raspberry Pi Pico — Circuits & Experiments
 
-A measurement and control platform built toward electrogravitics experiments —
-specifically the Biefeld-Brown effect (asymmetric capacitor lift) and related
-force-production phenomena documented in Valone (2008).  Starting from the
-SunFounder Thales Kit with no prior hardware or knowledge, each stage adds an
-instrumentation or control capability that feeds directly into later high-voltage
-work.  See [docs/inventory.md](docs/inventory.md) for the component list and
-[docs/related/](docs/related/) for reference literature.
+A general-purpose collection of Raspberry Pi Pico circuits: MicroPython
+code, SPICE netlists, and breadboard wiring guides, organized by category.
+See [docs/inventory.md](docs/inventory.md) for the component list.
 
----
-
-## What is `diagram.json`?
-
-`diagram.json` is a Wokwi circuit layout file (https://wokwi.com/).  It
-defines the components and wiring for the online simulator.
-
-### How to use it
-
-1. Go to https://wokwi.com/projects/new
-2. Replace the default `diagram.json` with the one from a project folder
-3. Add `main.py` if the project has one
-4. Run the simulation
+This repo is the general-purpose Pico infrastructure for the sibling
+[arcticoder/lab](https://github.com/arcticoder/lab) repo, which builds
+project-specific circuits (currently a physics-instrumentation lab bench)
+on top of the patterns established here — see its
+[spacetime_circuits_dependency.md](https://github.com/arcticoder/lab/blob/main/docs/spacetime_circuits_dependency.md)
+and
+[general_purpose_circuit_dependency.md](https://github.com/arcticoder/lab/blob/main/docs/general_purpose_circuit_dependency.md)
+for where these circuits fit into a larger build.
 
 ---
 
 ## Schematics
 
-Each project has a `schematic.png` generated from its `.spice` netlist.  To
-regenerate any schematic after editing the netlist:
+Each project has a `schematic.png` generated from its `.spice` netlist.
+`schematic.png` is **not committed** (see `.gitignore`) — it's a build
+artifact, regenerated on demand:
 
 ```bash
 # from the repo root
-python tools/spice_to_schematic.py gpio_analog_sensing/gpio_analog_sensing.spice
+python tools/spice_to_schematic.py measurement_tools/gpio_analog_sensing/gpio_analog_sensing.spice
 ```
 
 Output is written as `schematic.png` in the same directory as the `.spice` file.
@@ -69,7 +61,7 @@ will find the device automatically.
 Without this step you will see:
 
 ```bash
-mpremote cp gpio_analog_sensing/main.py :main.py
+mpremote cp measurement_tools/gpio_analog_sensing/main.py :main.py
 # mpremote: no device found
 ```
 
@@ -83,13 +75,13 @@ the official MicroPython CLI tool for file transfer and REPL access.
 pip install mpremote        # version 1.27.0 used here
 
 # Copy a project's main.py to the Pico
-mpremote cp gpio_analog_sensing/main.py :main.py
+mpremote cp measurement_tools/gpio_analog_sensing/main.py :main.py
 
 # List files on the Pico
 mpremote ls
 
 # Run a script without copying it (useful for testing)
-mpremote run gpio_analog_sensing/main.py
+mpremote run measurement_tools/gpio_analog_sensing/main.py
 ```
 
 To open the interactive REPL and see `print()` output:
@@ -106,30 +98,29 @@ The script stored as `main.py` on the Pico runs automatically on power-up.
 
 ---
 
-## Stages (the project path)
+## Circuits (built)
 
-Work through these stages in order.  Each stage adds a measurement or control
-capability that feeds into later high-voltage electrogravitics work.  Completed
-stages include MicroPython code, a SPICE netlist, and a breadboard wiring guide.
+Each circuit folder has MicroPython code (where applicable), a SPICE
+netlist, a breadboard wiring guide, and a README.
 
----
+| Folder | Circuit | Category |
+|--------|---------|----------|
+| `leds/led_single/` | Single LED + 470 Ω, static 3.3 V test | LEDs |
+| `leds/led_parallel/` | Two parallel LEDs, 470 Ω each, 3.3 V | LEDs |
+| `leds/gpio_led_basic/` | Pico GP17 → 220 Ω → LED, MicroPython blink loop | LEDs |
+| `buttons/gpio_button_timing/` | Button input + LED, press/release timing | Buttons |
+| `measurement_tools/gpio_analog_sensing/` | Voltage divider + ADC measurement, calibration, noise/drift analysis | Measurement tools |
 
-### Stage 5 — Voltage divider + ADC measurement (`gpio_analog_sensing/`)
+### `measurement_tools/gpio_analog_sensing/` — Voltage divider + ADC measurement
 
-**The foundational measurement stage.**  A resistor divider feeds **GP26/ADC0**;
-a potentiometer provides a calibration reference on **GP27/ADC1**.  This is the
-exact skill set needed in later stages when a precision resistor network steps a
-kilovolt-range HV signal down to the Pico's 3.3 V ADC window.  Optional I2C
-LCD 1602 displays live readings.
-
-See Valone (2008) §3 for how Brown and Woodward relied on careful voltage
-measurement to characterise the F(V) curve of their dielectric capacitors.
+The most complete stage here.  A resistor divider feeds **GP26/ADC0**; a
+potentiometer provides a calibration reference on **GP27/ADC1**.  Optional
+I2C LCD 1602 displays live readings.
 
 | File | Purpose |
 |------|---------|
 | `main.py` | MicroPython ADC read + LCD display loop |
 | `calibration.py` | Calibration helper script |
-| `diagram.json` | Wokwi circuit layout |
 | `gpio_analog_sensing.spice` | ngspice netlist (three divider conditions swept) |
 | `schematic.png` | Auto-generated schematic |
 | `breadboard.md` | Step-by-step wiring guide with abbreviations and wire selections |
@@ -138,78 +129,85 @@ measurement to characterise the F(V) curve of their dielectric capacitors.
 
 ---
 
-## Planned stages
+## Planned circuits
 
-Stages 6–8 use parts already in [docs/inventory.md](docs/inventory.md).
-Stages 9–10 require a high-voltage supply (not yet acquired).
+Parts already in [docs/inventory.md](docs/inventory.md) cover the next few
+stages below. `hv_divider_adc/` requires a high-voltage supply (not yet
+acquired).
 
-| Stage | Folder | Topic | Electrogravitics relevance |
-|-------|--------|-------|----------------------------|
-| 6 | `gpio_pwm_led/` | PWM signal output | Drives HV boost-converter control pins; sets pulse timing for Woodward-effect experiments |
-| 7 | `gpio_i2c_mpu6050/` | I2C IMU — MPU6050 | Measures deflection and vibration during torsion-balance or hanging-lifter tests |
-| 8 | `gpio_i2c_lcd/` | I2C LCD live display | Real-time voltage and thrust readout during experiments |
-| 9 | `hv_divider_adc/` | HV divider + ADC | Reads 1–30 kV safely via precision resistor divider; pre-req for all HV experiments |
-| 10 | `biefeld_brown_lifter/` | Asymmetric capacitor baseline | Biefeld-Brown effect: measure lift onset voltage and the F(V) curve |
+| Folder | Circuit |
+|--------|---------|
+| `leds/gpio_pwm_led/` | PWM signal output — duty cycle controls LED brightness |
+| `measurement_tools/gpio_i2c_mpu6050/` | I2C IMU — MPU6050, deflection/vibration measurement |
+| `displays/gpio_i2c_lcd/` | I2C LCD live display |
+| `buttons/gpio_interrupt_button/` | Interrupt-driven button input, no polling |
+| `measurement_tools/hv_divider_adc/` | HV divider + ADC — reads high voltages safely via a precision resistor divider |
 
 ---
 
 ## Notes
 
 - All circuits use 3.3 V logic; GPIO pins are not 5 V tolerant
-- Stages 9–10 involve kilovolt-range signals — **do not proceed until HV
-  safety precautions are in place**; see [docs/related/](docs/related/) for
-  voltage and current levels reported in the literature
+- The `hv_divider_adc/` stage involves higher-voltage signals — do not
+  proceed until appropriate safety precautions are in place
 - See [micropico/README.md](micropico/README.md) for device-level scripts
 - See [docs/inventory.md](docs/inventory.md) for the full component list and
   wire catalogue
-- See [docs/related/Valone2008/](docs/related/Valone2008/) for the primary
-  reference on the Biefeld-Brown effect, asymmetric capacitors, and Woodward
-  effect experimental apparatus
 
 ---
 
 ## Running simulations
 
-Stage folders that have an ngspice `.spice` netlist can be simulated before
+Circuit folders with an ngspice `.spice` netlist can be simulated before
 building.  Run with `ngspice -b` to predict voltages and currents.
 
 ```bash
-# Stage 5 — voltage divider + ADC
-ngspice -b gpio_analog_sensing/gpio_analog_sensing.spice
+# Voltage divider + ADC
+ngspice -b measurement_tools/gpio_analog_sensing/gpio_analog_sensing.spice
+
+# LED circuits
+ngspice -b leds/led_single/test.spice
+ngspice -b leds/led_parallel/test2.spice
+ngspice -b leds/gpio_led_basic/gpio_led_basic.spice
+
+# Button timing
+ngspice -b buttons/gpio_button_timing/gpio_button_timing.spice
 ```
 
-Run from the repo root.  Output goes to stdout with labeled column headers.
-HV-stage netlists will be added as those stages are designed.
+Run from the repo root. Output goes to stdout with labeled column headers.
 
 ---
 
 ## Repo structure
 
 ```
-gpio_analog_sensing/        stage 5 — voltage divider + ADC (completed)
-    main.py             ADC read + LCD display
-    calibration.py      calibration helper
-    diagram.json        Wokwi layout
-    gpio_analog_sensing.spice
-    schematic.png
-    breadboard.md
-    README.md
-    docs/
-        calibration_guide.md
-        noise_measurement.md
-        drift_measurement.md
+leds/
+    led_single/          static 3.3 V LED test (built)
+    led_parallel/         two parallel LEDs, 3.3 V (built)
+    gpio_led_basic/        Pico GP17 → 220 Ω → LED, MicroPython blink (built)
+    gpio_pwm_led/           PWM brightness control (planned)
 
-gpio_pwm_led/               stage 6 — PWM output (planned)
-    bom.md
+buttons/
+    gpio_button_timing/    button input + LED, press/release timing (built)
+    gpio_interrupt_button/ interrupt-driven button input (planned)
 
-gpio_i2c_mpu6050/           stage 7 — I2C IMU (planned)
+measurement_tools/
+    gpio_analog_sensing/   voltage divider + ADC + calibration (built)
+        main.py             ADC read + LCD display
+        calibration.py      calibration helper
+        gpio_analog_sensing.spice
+        schematic.png
+        breadboard.md
+        README.md
+        docs/
+            calibration_guide.md
+            noise_measurement.md
+            drift_measurement.md
+    gpio_i2c_mpu6050/      I2C IMU (planned)
+    hv_divider_adc/        HV divider + ADC (planned; requires HV supply)
 
-gpio_i2c_lcd/               stage 8 — I2C LCD display (planned)
-    bom.md
-
-hv_divider_adc/             stage 9 — HV divider ADC (planned; requires HV supply)
-
-biefeld_brown_lifter/       stage 10 — Biefeld-Brown asymmetric capacitor (planned)
+displays/
+    gpio_i2c_lcd/          I2C LCD 1602 display (planned)
 
 micropico/
     main.py             general-purpose device entry point
@@ -221,8 +219,7 @@ lib/
 
 docs/
     inventory.md        full component and wire catalogue
-    related/
-        Valone2008/     primary reference — electrogravitics and Biefeld-Brown effect
+    kb/                 process notes for future LLM sessions, not end-user docs
 
 tools/
     spice_to_schematic.py   generate schematic.png from a .spice file

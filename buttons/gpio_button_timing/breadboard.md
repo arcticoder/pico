@@ -9,8 +9,7 @@ When the button is pressed, GP16 reads 3.3 V (HIGH). When released, it is
 pulled to GND through R_pull (LOW). `main.py` turns the LED on whenever the
 button is held and logs press/release timestamps.
 
-**Equivalent to:** `gpio_button_timing/diagram.json` (Wokwi) and
-`gpio_button_timing/gpio_button_timing.spice`
+**Equivalent to:** `buttons/gpio_button_timing/gpio_button_timing.spice`
 
 ---
 
@@ -132,7 +131,7 @@ Pico GP16 (c20) ──> Row 30, col A ── [R_pull 10kΩ] ── GND
 ## Simulation
 
 ```bash
-ngspice -b gpio_button_timing/gpio_button_timing.spice
+ngspice -b buttons/gpio_button_timing/gpio_button_timing.spice
 ```
 
 * `i(D_led)` at 3.3 V ≈ 5.9 mA (safe)

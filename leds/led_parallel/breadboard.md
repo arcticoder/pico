@@ -120,7 +120,7 @@ value and both LEDs are the same type/color.
 ## Simulation vs. breadboard
 
 ```bash
-ngspice -b led_parallel/test2.spice
+ngspice -b leds/led_parallel/test2.spice
 ```
 
 The `i(D1)` and `i(D2)` columns should be equal (symmetric branches) and

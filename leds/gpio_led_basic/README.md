@@ -10,7 +10,6 @@ resistor.  This is the first GPIO output experiment.
 | File | Purpose |
 |------|---------|
 | `main.py` | MicroPython blink loop |
-| `diagram.json` | Wokwi circuit layout |
 | `gpio_led_basic.spice` | ngspice netlist |
 | `gpio_led_basic.gc` | GnuCap batch script |
 | `schematic.png` | Generated schematic image |
@@ -47,10 +46,10 @@ The LED blinks every 0.5 s.
 
 ```bash
 # GnuCap — sweeps supply from 0 V to 3.3 V in 0.1 V steps
-gnucap -b gpio_led_basic/gpio_led_basic.gc
+gnucap -b leds/gpio_led_basic/gpio_led_basic.gc
 
 # ngspice — DC operating-point at 3.3 V
-ngspice -b gpio_led_basic/gpio_led_basic.spice
+ngspice -b leds/gpio_led_basic/gpio_led_basic.spice
 ```
 
 Run from the **repo root**.  GnuCap output columns (in order): supply

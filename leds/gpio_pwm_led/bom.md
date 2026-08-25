@@ -1,10 +1,10 @@
-# Stage 6 — GPIO PWM LED (`gpio_pwm_led/`)
+# GPIO PWM LED (`leds/gpio_pwm_led/`)
 
 PWM brightness control. **GP15** outputs a PWM signal; duty cycle controls LED brightness.
 
 ## Bill of materials
 
-All parts are in [docs/inventory.md](../docs/inventory.md).
+All parts are in [docs/inventory.md](../../docs/inventory.md).
 
 | Qty | Part | Value / notes |
 |-----|------|--------------|
@@ -18,7 +18,6 @@ All parts are in [docs/inventory.md](../docs/inventory.md).
 ```
 gpio_pwm_led/
     main.py             MicroPython PWM duty-cycle sweep
-    diagram.json        Wokwi layout
     gpio_pwm_led.spice  DC operating point (PWM mid-point approximation)
     gpio_pwm_led.gc     GnuCap batch script
     schematic.png       auto-generated schematic

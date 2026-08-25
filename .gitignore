@@ -22,11 +22,6 @@ env/
 # --- MicroPico (local device config) ---
 .micropico/
 
-# --- Wokwi ---
-# keep diagram.json (you want this tracked)
-# ignore generated simulation artifacts if any appear later
-wokwi-*.log
-
 # --- Temporary / misc ---
 *.log
 *.tmp
@@ -40,6 +35,7 @@ micropico/.micropico
 # scratch/ is a KiCad workspace and local staging area — not tracked
 scratch/
 
-docs/related/**/*.pdf*
-docs/related/**/*.json
-docs/related/**/*.jpg
+# --- Generated schematics ---
+# Deterministically regenerated from each circuit's .spice netlist via
+# tools/spice_to_schematic.py — see README.md "Schematics" section.
+schematic.png

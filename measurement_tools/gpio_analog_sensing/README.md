@@ -29,7 +29,6 @@ before advancing to amplification stages or modulated detection experiments.
 | `gpio_analog_sensing.spice` | SPICE netlist of voltage divider (3 operating conditions) |
 | `gpio_analog_sensing.gc` | GnuCap batch simulation |
 | `schematic.png` | Schematic diagram (run `tools/spice_to_schematic.py` to regenerate) |
-| `diagram.json` | Wokwi simulation layout |
 | `breadboard.md` | Step-by-step physical wiring guide |
 | `docs/noise_measurement.md` | Guide: characterising ADC noise |
 | `docs/drift_measurement.md` | Guide: measuring and interpreting signal drift |
@@ -42,7 +41,7 @@ before advancing to amplification stages or modulated detection experiments.
 ### 1. Run the simulation
 
 ```bash
-gnucap -b gpio_analog_sensing/gpio_analog_sensing.gc
+gnucap -b measurement_tools/gpio_analog_sensing/gpio_analog_sensing.gc
 ```
 
 Check `v(2)` (bright), `v(3)` (dim), `v(5)` (pot mid) match expected values.
@@ -54,7 +53,7 @@ Follow `breadboard.md`.
 ### 3. Deploy and run
 
 ```bash
-mpremote connect /dev/ttyACM0 run gpio_analog_sensing/main.py
+mpremote connect /dev/ttyACM0 run measurement_tools/gpio_analog_sensing/main.py
 ```
 
 Output:
@@ -115,5 +114,5 @@ Once calibrated:
 ## Schematic regeneration
 
 ```bash
-python tools/spice_to_schematic.py gpio_analog_sensing/gpio_analog_sensing.spice
+python tools/spice_to_schematic.py measurement_tools/gpio_analog_sensing/gpio_analog_sensing.spice
 ```

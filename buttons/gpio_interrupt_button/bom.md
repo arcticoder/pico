@@ -1,11 +1,11 @@
-# Stage 7 — Interrupt-driven button input (`gpio_interrupt_button/`)
+# Interrupt-driven button input (`buttons/gpio_interrupt_button/`)
 
 Interrupt (IRQ) handler on **GP16**.  The handler fires on the rising edge
 (button press) and falling edge (release) without polling.
 
 ## Bill of materials
 
-All parts are in [docs/inventory.md](../docs/inventory.md).
+All parts are in [docs/inventory.md](../../docs/inventory.md).
 
 | Qty | Part | Value / notes |
 |-----|------|--------------|
@@ -20,7 +20,6 @@ All parts are in [docs/inventory.md](../docs/inventory.md).
 ```
 gpio_interrupt_button/
     main.py                     MicroPython IRQ handler + debounce
-    diagram.json                Wokwi layout
     gpio_interrupt_button.spice DC netlist (pull-down divider operating point)
     gpio_interrupt_button.gc    GnuCap batch script
     schematic.png               auto-generated schematic

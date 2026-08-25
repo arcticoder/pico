@@ -62,7 +62,7 @@ Update quantities as components are used or added.
 | 7-Segment Display       | 1        |                              |
 | I2C LCD 1602            | 1        |                              |
 | WS2812 RGB LED Strip    | 1        | 8-LED strip                  |
-| Slide Switch            | 5        |                              |
+| Slide Switch            | 5        | 3-pin, "1P2T" 2-position slide switch. One outer pin floats unconnected in both positions; the other outer/middle pin (the active pin) closes to the third pin in one slide position and opens in the other — functionally SPST from the outside despite 3 physical terminals. No printed C/NO/NC markings; identify the active pin per-unit with `lab/measurement_tools/switch_pin_identifier/` before wiring. See `lab/docs/history.md:2831-3210` for the diagnostic conversation this came from. |
 | Push Button             | 10       |                              |
 
 ---
@@ -183,17 +183,35 @@ For the `lab/` repo's spacetime research PSU tiers (`psu_ultralow`,
 
 ---
 
-## On Order (AliExpress — not yet received as of 2026-08-21)
+## Prototyping, Analog ICs & Test Equipment
 
-Placed for the `lab/` repo's spacetime research build; not yet counted in
-the tables above. Full specs, links, and datasheets in `lab/docs/orders.md`
-and `lab/docs/parts_reference.md`. Move each row up into its proper table
-above once physically received.
+For the `lab/` repo's spacetime research build. Full specs and datasheets
+in `lab/docs/orders.md` and `lab/docs/parts_reference.md`.
 
-| Component                     | Quantity | Notes                                              |
-|--------------------------------|----------|-----------------------------------------------------|
-| Breadboard (mini SYB-170, 2pk) | 2        | Separate listing from the received black one above |
-| Breadboard (MB-102, 400-point) | 1        | 300 terminal + 100 distribution-bar tie points      |
-| CD4066BCN (quad bilateral switch, DIP-14) | 10 | Analog switch/mux                              |
-| LM358P (dual op-amp, DIP-8)    | 10       | Budget op-amp for bring-up circuits                 |
-| TYPE-C Female Test Board (USB3.1 16P → 2.54mm) | 1 | Blue variant                                   |
+| Component                              | Quantity | Notes                                                           |
+|------------------------------------------|----------|------------------------------------------------------------------|
+| Breadboard (mini SYB-170, 2pk)         | 2        | Received 2026-08-24; separate listing from the black SYB-170 already in "Prototyping and Cables" above |
+| Breadboard (MB-102, 400-point)         | 1        | Received 2026-08-24; 300 terminal + 100 distribution-bar tie points |
+| CD4066BCN (quad bilateral switch, DIP-14) | 10    | Received 2026-08-24; analog switch/mux — see `lab/measurement_tools/cd4066_switch_tester/` for the per-unit bring-up check before trusting one in a downstream design |
+| LM358P (dual op-amp, DIP-8)            | 10       | Received 2026-08-24; budget op-amp for bring-up circuits — see `lab/signal_conditioning/voltage_reference_lm358/` |
+| TYPE-C Female Test Board (USB3.1 16P → 2.54mm) | 1 | Received 2026-08-24; blue variant, pads `CC2, D+, D-, SBU1, SBU2, CC1, VBUS, GND` per `lab/docs/parts_reference.md#usb-c-16-pin-test-breakout-board` |
+
+---
+
+## On Order (AliExpress)
+
+Nothing currently on order. Placed for the `lab/` repo's spacetime research
+build; new rows go here first, with full specs/links/datasheets in
+`lab/docs/orders.md` and `lab/docs/parts_reference.md`. Move each row up
+into its proper table above once physically received.
+
+---
+
+## Tools
+
+| Component                    | Quantity | Notes                                                    |
+|-------------------------------|----------|-----------------------------------------------------------|
+| WorkPro 30W Soldering Iron    | 1        | Received 2026-08-24                                        |
+| Rosin core solder (tube)      | 1        | Included with iron                                          |
+| Soldering iron stand          | 1        | Included with iron                                          |
+| Soldering tip, 5/32 in.       | 2        | Included with iron                                          |

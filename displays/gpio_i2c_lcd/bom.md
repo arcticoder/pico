@@ -1,4 +1,4 @@
-# Stage 8 — I2C LCD 1602 display (`gpio_i2c_lcd/`)
+# I2C LCD 1602 display (`displays/gpio_i2c_lcd/`)
 
 Drive an I2C LCD 1602 (PCF8574 backpack) from the Pico.  **GP4/SDA** and
 **GP5/SCL** carry the I2C bus; the library in `lib/lcd1602.py` handles the
@@ -6,7 +6,7 @@ protocol.
 
 ## Bill of materials
 
-All parts are in [docs/inventory.md](../docs/inventory.md).
+All parts are in [docs/inventory.md](../../docs/inventory.md).
 
 | Qty | Part | Value / notes |
 |-----|------|--------------|
@@ -21,7 +21,6 @@ All parts are in [docs/inventory.md](../docs/inventory.md).
 ```
 gpio_i2c_lcd/
     main.py             MicroPython I2C scan + LCD write
-    diagram.json        Wokwi layout
     gpio_i2c_lcd.spice  I2C bus pull-up DC netlist
     gpio_i2c_lcd.gc     GnuCap batch script
     schematic.png       auto-generated schematic
