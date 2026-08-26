@@ -62,7 +62,7 @@ Update quantities as components are used or added.
 | 7-Segment Display       | 1        |                              |
 | I2C LCD 1602            | 1        |                              |
 | WS2812 RGB LED Strip    | 1        | 8-LED strip                  |
-| Slide Switch            | 5        | 3-pin, "1P2T" 2-position slide switch. One outer pin floats unconnected in both positions; the other outer/middle pin (the active pin) closes to the third pin in one slide position and opens in the other — functionally SPST from the outside despite 3 physical terminals. No printed C/NO/NC markings; identify the active pin per-unit with `lab/measurement_tools/switch_pin_identifier/` before wiring. See `lab/docs/history.md:2831-3210` for the diagnostic conversation this came from. |
+| Slide Switch            | 5        | 3-pin SPDT slide switch (SunFounder Thales kit part). Pin 2 (middle) is the fixed/common contact; sliding the bar left connects pin 2 to pin 1, sliding it right connects pin 2 to pin 3 — one throw is always made, never both open at once. No printed pin markings; identify pin 2 by continuity/position (it's the one that stays connected across both slide directions) rather than by probing for a floating pin. |
 | Push Button             | 10       |                              |
 
 ---
@@ -200,10 +200,19 @@ in `lab/docs/orders.md` and `lab/docs/parts_reference.md`.
 
 ## On Order (AliExpress)
 
-Nothing currently on order. Placed for the `lab/` repo's spacetime research
-build; new rows go here first, with full specs/links/datasheets in
-`lab/docs/orders.md` and `lab/docs/parts_reference.md`. Move each row up
-into its proper table above once physically received.
+Placed for the `lab/` repo's spacetime research build; new rows go here
+first, with full specs/links/datasheets in `lab/docs/orders.md` and
+`lab/docs/parts_reference.md`. Move each row up into its proper table
+above once physically received.
+
+| Component                                    | Quantity | Notes                                                           |
+|-----------------------------------------------|----------|------------------------------------------------------------------|
+| 3296 trimming potentiometer, 10 kΩ            | 10       | Ordered 2026-08-25, not yet received. Listing calls it "multi-turn" but the 3296 package is the standard single-turn cermet trimmer — verify turns-per-span once it arrives. See `lab/docs/parts_reference.md#3296-trimming-potentiometer` |
+| Fuse holder, panel-mount (6×30mm, 10A/250V)   | 1        | Ordered 2026-08-25, not yet received. Pairs with the 2A glass fuse below for the `psu_medlow` protection tier. See `lab/docs/parts_reference.md#panel-mount-fuse-holder` |
+| NE555 timer IC (DIP-8)                        | 10       | Ordered 2026-08-25, not yet received. For tier1 `OSC` (oscillator) and tier2 `FREQC` (frequency counter). See `lab/docs/parts_reference.md#ne555-timer` |
+| TL431A precision shunt reference (TO-92)      | 5        | Ordered 2026-08-25, not yet received. Adjustable 2.5–36V bandgap reference — candidate alternative/upgrade to the LM358 divider-buffer for tier1 `REF`. See `lab/docs/parts_reference.md#tl431a-precision-shunt-reference` |
+| Glass tube fuse, 6×30mm 250V 2A (fast-blow)   | 10       | Ordered 2026-08-25, not yet received. Pairs with the panel-mount holder above for `psu_medlow`. See `lab/docs/parts_reference.md#glass-tube-fuses-6x30mm` |
+| 18-in-1 wire stripper/crimper pliers          | 1        | Ordered 2026-08-25, not yet received. Resolves the wire-stripper dependency blocking `psu_ultralow_v1`/`psu_low_v2` AA-holder lead termination. |
 
 ---
 

@@ -15,6 +15,25 @@ change. When cleaning up references to something removed from the current
 repo (2026-08-24: Wokwi, `docs/related/Valone2008/`, `biefeld_brown_lifter`),
 only touch `README.md` and per-circuit docs — leave `docs/history.md` as-is.
 
+## Inventory "Slide Switch" row corrected (2026-08-25) — it's a standard SPDT part, not an unmarked mystery switch
+
+`docs/inventory.md`'s Slide Switch row previously described the 3-pin
+switch as "1P2T" with one floating outer pin and one active pin — a
+hypothesis from an ad hoc probe that lacked a solid GND reference (see
+the sibling `lab/` repo's `docs/kb/repo_docs_conventions.md` entry on
+`switch_pin_identifier`'s GND-reference bug, and the follow-up entry
+documenting that whole circuit's deletion). The manufacturer's own page
+(SunFounder Thales kit, `components/slide_switch.html`) describes this
+part as a standard 3-pin slide switch: pin 2 (middle) is the fixed
+contact, and it connects to pin 1 or pin 3 depending on slide direction —
+ordinary SPDT behavior, not an oddball part needing per-unit
+reverse-engineering. The row is now written from that reference instead
+of the old ad hoc probe result. If a similar "no printed markings, so we
+probed it and got a weird result" situation comes up for another
+inventory part, check whether the manufacturer/kit vendor already
+documents the part before building a whole Pico probe circuit to
+characterize it from scratch.
+
 ## Category-subdirectory taxonomy (introduced 2026-08-24)
 
 Circuits moved from flat top-level folders into category subdirectories,
