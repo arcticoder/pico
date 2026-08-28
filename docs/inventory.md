@@ -63,7 +63,7 @@ Update quantities as components are used or added.
 | I2C LCD 1602            | 1        |                              |
 | WS2812 RGB LED Strip    | 1        | 8-LED strip                  |
 | Slide Switch            | 5        | 3-pin SPDT slide switch (SunFounder Thales kit part). Pin 2 (middle) is the fixed/common contact; sliding the bar left connects pin 2 to pin 1, sliding it right connects pin 2 to pin 3 — one throw is always made, never both open at once. No printed pin markings; identify pin 2 by continuity/position (it's the one that stays connected across both slide directions) rather than by probing for a floating pin. |
-| Push Button             | 10       |                              |
+| Push Button             | 10       | Used as a "ready" signal (Pin.PULL_UP, active-low) in circuits that need to pause mid-run for a physical action — `mpremote run` can't forward keystrokes for `input()`, so a hardcoded countdown was the old workaround; a button removes the time pressure. See `lab/signal_conditioning/voltage_reference_lm358/` |
 
 ---
 
