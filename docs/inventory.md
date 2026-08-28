@@ -179,7 +179,7 @@ For the `lab/` repo's spacetime research PSU tiers (`psu_ultralow`,
 | Polyfuse RXEF005 (0.05A / 50mA)         | 20       | Received 2026-08-21; untested — validate each unit with `lab/measurement_tools/fuse_test_voltmeter/` before trusting it near an LED |
 | Polyfuse RXEF050 (0.5A / 500mA)         | 20       | Received 2026-08-21; untested — same validation step as above    |
 | 1N5817 Schottky diode (1A 20V, DO-41)   | 20       | Received 2026-08-21; untested — verify forward drop/orientation per unit before use in `psu_low_v2` |
-| AA battery holder (1×AA, single-cell)  | 5        | Received 2026-08-21; ready for direct use in `psu_ultralow_v1`/`psu_low_v2` |
+| AA battery holder (1×AA, single-cell)  | 5        | Received 2026-08-21; ready for direct use in `psu_ultralow_v1`/`psu_low_v2`. Confirmed-working temporary lead termination (2026-08-28, ahead of the wire stripper order arriving): twist a non-covered 0.25cm jump wire around each bare holder lead and wrap in electrical tape — no soldering/crimping needed. Treat as a stand-in until leads are stripped/soldered to Dupont connectors, not a wiring defect if seen on a breadboard. |
 
 ---
 
@@ -192,7 +192,7 @@ in `lab/docs/orders.md` and `lab/docs/parts_reference.md`.
 |------------------------------------------|----------|------------------------------------------------------------------|
 | Breadboard (mini SYB-170, 2pk)         | 2        | Received 2026-08-24; separate listing from the black SYB-170 already in "Prototyping and Cables" above |
 | Breadboard (MB-102, 400-point)         | 1        | Received 2026-08-24; 300 terminal + 100 distribution-bar tie points |
-| CD4066BCN (quad bilateral switch, DIP-14) | 10    | Received 2026-08-24; analog switch/mux — see `lab/measurement_tools/cd4066_switch_tester/` for the per-unit bring-up check before trusting one in a downstream design |
+| CD4066BCN (quad bilateral switch, DIP-14) | 10    | Received 2026-08-24; analog switch/mux — see `lab/measurement_tools/cd4066_switch_tester/` for the per-unit bring-up check before trusting one in a downstream design. All 10 units' switch 1 (I/O A pin 1 / I/O B pin 2 / control pin 13) bench-tested PASS 2026-08-28 after an earlier FAIL was root-caused to DIP pin misidentification, not a bad chip — see `lab/docs/parts_reference.md` for the correct pinout before wiring. Switches 2–4 on each chip are not yet individually tested. |
 | LM358P (dual op-amp, DIP-8)            | 10       | Received 2026-08-24; budget op-amp for bring-up circuits — see `lab/signal_conditioning/voltage_reference_lm358/` |
 | TYPE-C Female Test Board (USB3.1 16P → 2.54mm) | 1 | Received 2026-08-24; blue variant, pads `CC2, D+, D-, SBU1, SBU2, CC1, VBUS, GND` per `lab/docs/parts_reference.md#usb-c-16-pin-test-breakout-board` |
 
