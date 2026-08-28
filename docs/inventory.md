@@ -20,6 +20,15 @@ Update quantities as components are used or added.
 
 ## Resistors
 
+All values below are the SunFounder Thales kit's standard **1/4W (0.25W)**
+axial resistors — the kit does not include any higher-wattage part. No
+value/quantity row here is individually rated ≥1W; a circuit needing more
+than ~0.2W of continuous dissipation at a given value needs a
+series/parallel network of these to spread the load, not a single
+higher-wattage part pulled from this table. See
+`lab/measurement_tools/fuse_test_voltmeter/breadboard.md` for a worked
+example (RXEF050 tier's 10 Ω test load).
+
 | Value   | Quantity |
 |---------|----------|
 | 10 Ω    | 10       |
