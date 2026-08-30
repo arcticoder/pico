@@ -185,8 +185,8 @@ For the `lab/` repo's spacetime research PSU tiers (`psu_ultralow`,
 
 | Component                              | Quantity | Notes                                                           |
 |------------------------------------------|----------|------------------------------------------------------------------|
-| Polyfuse RXEF005 (0.05A / 50mA)         | 20       | Received 2026-08-21; untested — validate each unit with `lab/measurement_tools/fuse_test_voltmeter/` before trusting it near an LED |
-| Polyfuse RXEF050 (0.5A / 500mA)         | 20       | Received 2026-08-21; untested — same validation step as above    |
+| Polyfuse RXEF005 (0.05A / 50mA)         | 20       | Received 2026-08-21; validated 2026-08-30 — all 20 units PASS (trip + reset confirmed) via `lab/measurement_tools/ammeter_10ohm/`, superseding the earlier `fuse_test_voltmeter` voltage-probe approach |
+| Polyfuse RXEF050 (0.5A / 500mA)         | 20       | Received 2026-08-21; validated 2026-08-30 — all 20 units PASS (trip + reset confirmed) via `lab/measurement_tools/ammeter_1ohm/` |
 | 1N5817 Schottky diode (1A 20V, DO-41)   | 20       | Received 2026-08-21; untested — verify forward drop/orientation per unit before use in `psu_low_v2` |
 | AA battery holder (1×AA, single-cell)  | 5        | Received 2026-08-21; ready for direct use in `psu_ultralow_v1`/`psu_low_v2`. Confirmed-working temporary lead termination (2026-08-28, ahead of the wire stripper order arriving): twist a non-covered 0.25cm jump wire around each bare holder lead and wrap in electrical tape — no soldering/crimping needed. Treat as a stand-in until leads are stripped/soldered to Dupont connectors, not a wiring defect if seen on a breadboard. |
 
@@ -222,6 +222,8 @@ above once physically received.
 | TL431A precision shunt reference (TO-92)      | 5        | Ordered 2026-08-25, not yet received. Adjustable 2.5–36V bandgap reference — candidate alternative/upgrade to the LM358 divider-buffer for tier1 `REF`. See `lab/docs/parts_reference.md#tl431a-precision-shunt-reference` |
 | Glass tube fuse, 6×30mm 250V 2A (fast-blow)   | 10       | Ordered 2026-08-25, not yet received. Pairs with the panel-mount holder above for `psu_medlow`. See `lab/docs/parts_reference.md#glass-tube-fuses-6x30mm` |
 | 18-in-1 wire stripper/crimper pliers          | 1        | Ordered 2026-08-25, not yet received. Resolves the wire-stripper dependency blocking `psu_ultralow_v1`/`psu_low_v2` AA-holder lead termination. |
+| Metal film resistor, 1% 1W (assorted, incl. 0.1Ω)  | 20  | Ordered 2026-08-30, not yet received. Includes the 0.1Ω value needed to replace the jumper-wire-chain shunt currently used in `lab/measurement_tools/ammeter_1ohm/` (see `lab/measurement_tools/resistance_measurement/`) with an actual resistor; also 1W-rated, above the SunFounder Thales kit's 1/4W ceiling. See `lab/docs/parts_reference.md#metal-film-resistor-kit-1w-1`. |
+| PT334-6C photodiode (5mm)                     | 10       | Ordered 2026-08-30, not yet received. Not yet assigned to a tier — candidate for future light-sensing circuits. See `lab/docs/parts_reference.md#pt334-6c-photodiode`. |
 
 ---
 
