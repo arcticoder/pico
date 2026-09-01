@@ -224,6 +224,9 @@ above once physically received.
 | 18-in-1 wire stripper/crimper pliers          | 1        | Ordered 2026-08-25, not yet received. Resolves the wire-stripper dependency blocking `psu_ultralow_v1`/`psu_low_v2` AA-holder lead termination. |
 | Metal film resistor, 1% 1W (assorted, incl. 0.1Ω)  | 20  | Ordered 2026-08-30, not yet received. Includes the 0.1Ω value needed to replace the jumper-wire-chain shunt currently used in `lab/measurement_tools/ammeter_1ohm/` (see `lab/measurement_tools/resistance_measurement/`) with an actual resistor; also 1W-rated, above the SunFounder Thales kit's 1/4W ceiling. See `lab/docs/parts_reference.md#metal-film-resistor-kit-1w-1`. |
 | PT334-6C photodiode (5mm)                     | 10       | Ordered 2026-08-30, not yet received. Not yet assigned to a tier — candidate for future light-sensing circuits. See `lab/docs/parts_reference.md#pt334-6c-photodiode`. |
+| Color-ring inductor assortment, 0307 1/4W (12 values, 1µH-1mH) | 120 | Ordered 2026-08-30, not yet received. Axial, color-ring-coded; listing also offers 0410/0510 packages but only 0307 1/4W was selected. See `lab/docs/parts_reference.md#color-ring-inductor-assortment-0307-14w`. |
+| Multilayer ceramic capacitor assortment, 50V (10 values, 10pF-100nF) | 300 | Ordered 2026-08-30, not yet received. Operating temperature is unresolved (listing self-contradicts: −40–80°C spec field vs. −25–185°C description text). See `lab/docs/parts_reference.md#multilayer-ceramic-capacitor-assortment-50v`. |
+| Aluminum electrolytic capacitor kit, 16V/25V/50V (12 values, 1µF-470µF) | 120 | Ordered 2026-08-30, not yet received. Listing URL unresolved (user supplied a `???` placeholder) — don't trust any URL later attached to this part without re-verifying. Polarized, radial-lead DIP-style. See `lab/docs/parts_reference.md#aluminum-electrolytic-capacitor-kit-1665025050v`. |
 
 ---
 
