@@ -207,6 +207,8 @@ in `lab/docs/orders.md` and `lab/docs/parts_reference.md`.
 | Fuse holder, panel-mount (6×30mm, 10A/250V)   | 1        | Received 2026-09-01; EGBO panel-mount socket, opening 12/14mm, rated 10A/250V. Pairs with the 2A glass fuse below for the `psu_medlow` protection tier. See `lab/docs/parts_reference.md#panel-mount-fuse-holder` |
 | NE555 timer IC (DIP-8)                        | 10       | Received 2026-09-01; untested/not yet validated per-unit — no per-unit test jig built yet for this bulk IC batch. For tier1 `OSC` (oscillator) and tier2 `FREQC` (frequency counter). See `lab/docs/parts_reference.md#ne555-timer` |
 | Glass tube fuse, 6×30mm 250V 2A (fast-blow)   | 10       | Received 2026-09-01; untested/not yet validated per-unit — no per-unit test jig built yet for this bulk consumable-fuse batch. Pairs with the panel-mount holder above for `psu_medlow`. See `lab/docs/parts_reference.md#glass-tube-fuses-6x30mm` |
+| 3296 trimming potentiometer, 10 kΩ            | 10       | Received 2026-09-01; single-turn cermet trimmer (listing's "multi-turn" claim not yet verified against the physical part). Candidate for tier1 `OSC` timing-adjustment (RC network of a 555 astable) alongside the NE555 batch above. See `lab/docs/parts_reference.md#3296-trimming-potentiometer` |
+| TL431A precision shunt reference (TO-92)      | 5        | Received 2026-09-01; untested. Adjustable 2.5–36V bandgap reference — candidate alternative/upgrade to the LM358 divider-buffer for tier1 `REF`; needs an external pull-up/current source into Cathode (sink-only device). See `lab/docs/parts_reference.md#tl431a-precision-shunt-reference` |
 
 ---
 
@@ -219,8 +221,6 @@ above once physically received.
 
 | Component                                    | Quantity | Notes                                                           |
 |-----------------------------------------------|----------|------------------------------------------------------------------|
-| 3296 trimming potentiometer, 10 kΩ            | 10       | Ordered 2026-08-25, not yet received. Listing calls it "multi-turn" but the 3296 package is the standard single-turn cermet trimmer — verify turns-per-span once it arrives. See `lab/docs/parts_reference.md#3296-trimming-potentiometer` |
-| TL431A precision shunt reference (TO-92)      | 5        | Ordered 2026-08-25, not yet received. Adjustable 2.5–36V bandgap reference — candidate alternative/upgrade to the LM358 divider-buffer for tier1 `REF`. See `lab/docs/parts_reference.md#tl431a-precision-shunt-reference` |
 | 18-in-1 wire stripper/crimper pliers          | 1        | Ordered 2026-08-25, not yet received. Resolves the wire-stripper dependency blocking `psu_ultralow_v1`/`psu_low_v2` AA-holder lead termination. |
 | Metal film resistor, 1% 1W (assorted, incl. 0.1Ω)  | 20  | Ordered 2026-08-30, not yet received. Includes the 0.1Ω value needed to replace the jumper-wire-chain shunt currently used in `lab/measurement_tools/ammeter_1ohm/` (see `lab/measurement_tools/resistance_measurement/`) with an actual resistor; also 1W-rated, above the SunFounder Thales kit's 1/4W ceiling. See `lab/docs/parts_reference.md#metal-film-resistor-kit-1w-1`. |
 | PT334-6C photodiode (5mm)                     | 10       | Ordered 2026-08-30, not yet received. Not yet assigned to a tier — candidate for future light-sensing circuits. See `lab/docs/parts_reference.md#pt334-6c-photodiode`. |
