@@ -60,3 +60,15 @@ repo-root-relative `ngspice -b <old-path>` / `mpremote cp <old-path>`
 command in that folder's own README and in the top-level `README.md`
 needs the new prefix. Grep the old bare folder name across the whole repo
 before considering a move done.
+
+## GitHub repo description/topics populated 2026-09-05 — see sibling `lab/` kb for the full story
+
+`gh repo view arcticoder/pico --json description,repositoryTopics` was
+`""`/`null` until this date. Set via `gh repo edit arcticoder/pico
+--description "..." --add-topic foo --add-topic bar` (repeatable
+`--add-topic`). Full rationale (why `pico`'s framing stays general-purpose
+with no lab-specific or spacetime-research language, matching the
+one-directional `lab/` → `pico/` doc-linking convention) is in the sibling
+`lab/docs/kb/repo_docs_conventions.md`'s "GitHub repo description/topics"
+entry — don't duplicate that reasoning here, just keep both repos'
+metadata consistent with it if asked to update again.
