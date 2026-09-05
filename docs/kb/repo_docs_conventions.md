@@ -9,11 +9,12 @@ knows this stuff first-hand.
 Same convention as the sibling `lab/` repo's `docs/kb/repo_docs_conventions.md`
 documents for `lab/docs/history.md`: past session entries describe the repo
 as it was at the time (including now-removed things like the Wokwi
-`diagram.json` workflow, the electrogravitics/Biefeld-Brown framing, and
-flat top-level circuit folders) and are not edited when current-state docs
-change. When cleaning up references to something removed from the current
-repo (2026-08-24: Wokwi, `docs/related/Valone2008/`, `biefeld_brown_lifter`),
-only touch `README.md` and per-circuit docs — leave `docs/history.md` as-is.
+`diagram.json` workflow, the earlier fringe-science-specific research
+framing, and flat top-level circuit folders) and are not edited when
+current-state docs change. When cleaning up references to something removed
+from the current repo (2026-08-24: Wokwi, `docs/related/Valone2008/`, the
+exotic-propulsion lifter build), only touch `README.md` and per-circuit docs
+— leave `docs/history.md` as-is.
 
 ## Inventory "Slide Switch" row corrected (2026-08-25) — it's a standard SPDT part, not an unmarked mystery switch
 
