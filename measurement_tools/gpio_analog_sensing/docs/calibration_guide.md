@@ -47,7 +47,10 @@ Use the potentiometer on GP27 (ADC1) as a known variable resistance:
    the live `V_pot` reading in `main.py`
 
 If predicted ≠ measured by > 5%, your `R_fixed` may not be exactly 10 kΩ.
-Measure it with a multimeter and update `R_FIXED` in `main.py`.
+Cross-check it the same way `R_fixed` was characterized in the first
+place — a known-reference divider read by a second Pico ADC channel (see
+the sibling `lab/` repo's `measurement_tools/resistance_measurement/` for
+a worked example of this technique) — and update `R_FIXED` in `main.py`.
 
 ---
 

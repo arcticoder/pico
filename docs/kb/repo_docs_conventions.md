@@ -16,6 +16,20 @@ from the current repo (2026-08-24: Wokwi, `docs/related/Valone2008/`, the
 exotic-propulsion lifter build), only touch `README.md` and per-circuit docs
 — leave `docs/history.md` as-is.
 
+## `docs/inventory.md` is now a one-line pointer to `../lab/docs/inventory.md` (moved 2026-09-07)
+
+The real inventory file moved to the sibling `lab/` repo — see that
+repo's `docs/kb/repo_docs_conventions.md` entry on the move for the full
+reasoning (repo-switching friction; `lab/` is where most day-to-day
+inventory edits happen). This repo's own `docs/inventory.md` is now just
+a redirect, kept so this repo's generic circuit BOMs
+(`buttons/gpio_interrupt_button/bom.md` etc.) and `README.md` still
+resolve *a* file without requiring `lab/` to be cloned alongside `pico/`.
+If you're working in `pico/` alone (no `lab/` checked out next to it),
+that link won't actually resolve — the entries below that reference
+`docs/inventory.md` describe it from *before* this move, when it held the
+real content.
+
 ## Inventory "Slide Switch" row corrected (2026-08-25) — it's a standard SPDT part, not an unmarked mystery switch
 
 `docs/inventory.md`'s Slide Switch row previously described the 3-pin
