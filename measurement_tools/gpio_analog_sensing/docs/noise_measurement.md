@@ -52,10 +52,18 @@ Sample output:
 
 ## Interpreting the result
 
+"Counts" here are `read_u16()` counts: the RP2040's 12-bit result scaled to
+16 bits, so one real ADC step (LSB, 0.806 mV) is 16 counts and one count is
+50.4 µV. An ideal 12-bit converter's own quantisation noise is LSB/√12 =
+0.233 mV = 4.6 counts. A std-dev below that means the input is sitting on
+one code, not that the ADC resolves 0.2 mV: don't read the table's best
+rows as a resolution. The smallest change you can reliably tell apart is
+about one LSB (0.8 mV) unless you average over noise that spans codes.
+
 | Std-dev (counts) | Quality | Notes |
 |-----------------|---------|-------|
-| 1–3             | Excellent | Near quantisation limit |
-| 3–8             | Good | Typical with 100 nF filter |
+| 1–3             | Excellent | Below the ideal quantisation noise: input is sitting on one code |
+| 3–8             | Good | Typical with 100 nF filter; around the quantisation noise (4.6) |
 | 8–20            | Fair | Consider longer wire, better ground |
 | > 20            | Poor | Check power supply, shielding |
 
