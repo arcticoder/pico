@@ -41,8 +41,6 @@ strip is one node).
 |--------------------------|-------|----------|
 | LED (any color)          | —     | 1        |
 | Resistor                 | 470 Ω | 1        |
-| Jump wire — orange, 2.25 cm | —     | 2        |
-| Jump wire — blue, 1.25 cm   | —     | 2        |
 
 ---
 

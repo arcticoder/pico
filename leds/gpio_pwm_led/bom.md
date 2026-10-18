@@ -10,8 +10,6 @@ All parts are in [docs/inventory.md](../../docs/inventory.md).
 |-----|------|--------------|
 | 1 | White LED | 3.2 V forward voltage (typical) |
 | 1 | Resistor | 220 Ω |
-| 1 | Jump wire | Red, 2.5 cm (GP15 row → resistor) |
-| 1 | Jump wire | Black, 1.5 cm (LED row → GND rail) |
 
 ## Planned files
 

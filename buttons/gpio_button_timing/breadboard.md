@@ -47,9 +47,6 @@ strip is one node).
 | Resistor                   | 220 Ω  | 1        |
 | Push button                | —      | 1        |
 | Resistor (pull-down)       | 10 kΩ  | 1        |
-| Jump wire — green, 1.0 cm  | —      | 1        |
-| Jump wire — orange, 2.25 cm | —      | 2        |
-| Jump wire — blue, 1.25 cm   | —      | 4        |
 
 ---
 

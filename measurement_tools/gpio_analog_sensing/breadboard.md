@@ -66,9 +66,6 @@ strip is one node).
 | LED (white)                  | LED_src  | —      | 1   |
 | Resistor (LED limit)         | R_led    | 220 Ω  | 1   |
 | I2C LCD 1602                 | LCD      | —      | 1   |
-| Jump wire — orange, 2.25 cm  | —        | —      | 4   |
-| Jump wire — blue, 1.25 cm    | —        | —      | 4   |
-| Jump wire — green, 1.0 cm    | —        | —      | 1   |
 | Dupont wire — cyan, 22 cm    | —        | —      | 1   |
 | Dupont wire — purple, 22 cm  | —        | —      | 1   |
 | Dupont wire — blue, 22 cm    | —        | —      | 2   |

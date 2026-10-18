@@ -11,9 +11,6 @@ All parts are in [docs/inventory.md](../../docs/inventory.md).
 |-----|------|--------------|
 | 1 | Push button | SPDT tactile, fits breadboard |
 | 1 | Resistor | 10 kΩ (pull-down) |
-| 1 | Jump wire | Blue, 1.25 cm (GP16 row → button leg) |
-| 1 | Jump wire | Black, 1.5 cm (other button leg → GND rail) |
-| 1 | Jump wire | Red, 2.5 cm (3V3 row → pull-down junction — optional if using internal pull) |
 
 ## Planned files
 
